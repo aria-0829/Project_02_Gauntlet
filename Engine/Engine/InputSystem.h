@@ -5,8 +5,6 @@
 
 class InputSystem
 {
-
-
 public:
 	// Singleton pattern: 
 
@@ -56,16 +54,11 @@ public:
 		std::function<void(bool)> handler);
 
 
-
-
-
 private:
 	bool  keyStates[SDL_NUM_SCANCODES] = { false };
 	bool mouseButtonStates[5];
 	int gamepadId;
 	InputSystem(const InputSystem&) = delete;
-
-
 
 	InputSystem operator = (const InputSystem&) = delete;
 	static InputSystem* instance;
@@ -79,10 +72,7 @@ private:
 	std::map<int, SDL_GameController*> gamepadMap;
 	std::map<SDL_JoystickID, std::map<SDL_GameControllerAxis, std::function<void(Sint16)>>> gamepadAxisEventHandlers;
 
-	
-
 	std::function<void()> quitEventHandler;
-
 };
 
 

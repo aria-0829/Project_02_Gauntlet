@@ -36,9 +36,6 @@ void Engine::Initialize()
 	SceneManager::Get().Initialize();
 
 	InputSystem::Instance().registerQuitEventHandler([this] {isRunning = false; });
-
-
-
 }
 
 void Engine::Destroy()

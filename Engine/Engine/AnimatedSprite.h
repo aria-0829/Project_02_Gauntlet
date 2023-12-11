@@ -32,19 +32,16 @@ private:
 
 	/**
 	 * @brief Initializes any variables as needed
-	 *
 	 */
 	void Initialize() override;
 
 	/**
 	 * @brief Cleans up any memory and pointers as needed
-	 *
 	 */
 	void Destroy() override;
 
 	/**
 	 * @brief Updates the animation frame to render based off of game time
-	 *
 	 */
 	void Update() override;
 
@@ -53,13 +50,11 @@ private:
 public:
 	/**
 	 * @brief AnimatedSprite constructor
-	 *
 	 */
 	AnimatedSprite() = default;
 
 	/**
 	 * @brief AnimatedSprite destructor
-	 *
 	 */
 	~AnimatedSprite() override = default;
 

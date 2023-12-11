@@ -2,10 +2,10 @@
   "AssetManager": {
     "Assets": [
       {
-        "GUID": "awooga"
+        "GUID": "Bat"
       },
       {
-        "GUID": "girl"
+        "GUID": "Witch-Front"
       }
     ]
   },
@@ -26,10 +26,10 @@
           {
             "ClassName": "AnimatedSprite",
             "ClassData": {
-              "Texture": "girl",
+              "Texture": "Witch-Front",
               "SpriteSheet": {
-                "Rows": 1,
-                "Columns": 20,
+                "Rows": 6,
+                "Columns": 5,
                 "Frames": 20
               }
             }
@@ -57,9 +57,13 @@
         },
         "Components": [
           {
-            "ClassName": "Sprite",
+            "ClassName": "AnimatedSprite",
             "ClassData": {
-              "Texture": "awooga"
+              "Texture": "Bat",
+              "SpriteSheet": {
+                "Rows": 5,
+                "Columns": 6,
+                "Frames": 20
             }
           },
           {
