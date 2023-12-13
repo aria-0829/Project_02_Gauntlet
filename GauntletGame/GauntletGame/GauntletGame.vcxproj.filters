@@ -1,57 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game_Register.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOver.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameCore.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOver.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Build\Assets\AssetManager.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="..\Build\Assets\AudioSystem.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="..\Build\Assets\RenderSettings.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="..\Build\Assets\SceneManager.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="..\Build\Assets\Scenes\Scene01.json">
-      <Filter>Scenes</Filter>
-    </None>
-    <None Include="..\Build\Assets\Scenes\Scene02.json">
-      <Filter>Scenes</Filter>
-    </None>
     <None Include="..\Build\Assets\hitEffect03.wav.asset">
       <Filter>Assets\Sounds</Filter>
-    </None>
-    <None Include="..\Build\Assets\girl.png.asset">
-      <Filter>Assets\Textures</Filter>
-    </None>
-    <None Include="..\Build\Assets\nottaco.png.asset">
-      <Filter>Assets\Textures</Filter>
     </None>
     <None Include="..\Build\Assets\PAPYRUS.TTF.asset">
       <Filter>Assets\Fonts</Filter>
@@ -79,9 +30,6 @@
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{2ee47f55-6683-499c-b248-d66c86e4cbb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{3b039dc0-fb18-40a3-992a-d93f49fa2e36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{d4205596-d14a-459b-aa18-e8880286e49d}</UniqueIdentifier>
     </Filter>
@@ -99,14 +47,6 @@
     <Media Include="..\Build\Assets\hitEffect03.wav">
       <Filter>Assets\Sounds</Filter>
     </Media>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Build\Assets\girl.png">
-      <Filter>Assets\Textures</Filter>
-    </Image>
-    <Image Include="..\Build\Assets\nottaco.png">
-      <Filter>Assets\Textures</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Build\Assets\PAPYRUS.TTF">

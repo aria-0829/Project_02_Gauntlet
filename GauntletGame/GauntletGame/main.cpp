@@ -1,10 +1,10 @@
 #include "GameCore.h"
 
-extern void GameRegisterClasses();
+//extern void GameRegisterClasses();
 
 int main(int argc, char** argv)
 {
-	GameRegisterClasses();
+	//GameRegisterClasses();
 
 	Engine::Instance().Initialize();
 	Engine::Instance().GameLoop();
