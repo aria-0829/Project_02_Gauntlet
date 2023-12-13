@@ -21,7 +21,7 @@
 // SOFTWARE.
 #include "EngineCore.h"
 #include "TypeClass.h"
-#include "Object.h"
+//#include "Object.h"
 
 #define NDEBUG_TYPECLASS
 

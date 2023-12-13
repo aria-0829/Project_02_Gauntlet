@@ -1,0 +1,14 @@
+{
+  "Projectile": {
+    "speed": 5,
+    "imagePath": "../Resources/Mainplayer/laserGreen.png",
+    "imageWidth": 5,
+    "imageHeight": 17
+  },
+  "EnemyProjectile": {
+    "speed": 5,
+    "imagePath": "../Resources/Enemies/laserRed.png",
+    "imageWidth": 5,
+    "imageHeight": 17
+  }
+}

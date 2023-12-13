@@ -1,0 +1,8 @@
+{
+  "Asteroid": {
+    "speed": 1,
+    "imagePath": "../Resources/Asteroids/meteorBig.png",
+    "imageWidth": 64,
+    "imageHeight": 64
+  }
+}

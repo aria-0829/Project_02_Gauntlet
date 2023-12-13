@@ -1,0 +1,15 @@
+{
+  "Player": {
+    "lives": 3,
+    "speed": 5,
+    "imagePath": "../Resources/Mainplayer/player.png",
+    "imageWidth": 48,
+    "imageHeight": 48
+  },
+  "Background": {
+    "scrollSpeed": 2,
+    "imagePath": "../Resources/Background/backgroundColor.png",
+    "imageWidth": 256,
+    "imageHeight": 256
+  }
+}

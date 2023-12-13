@@ -1,0 +1,10 @@
+{
+  "RenderSettings": {
+    "width": 1280,
+    "height": 720,
+    "fullscreen": false
+  },
+  "SceneManager": {
+      "scenefile": "../Data/Scene01.json"
+  }
+}

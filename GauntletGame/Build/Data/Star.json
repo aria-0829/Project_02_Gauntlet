@@ -1,0 +1,7 @@
+{
+  "Star": {
+        "imagePath": "../Resources/Background/starBig.png",
+        "imageWidth": 23,
+        "imageHeight": 21
+   }
+}
