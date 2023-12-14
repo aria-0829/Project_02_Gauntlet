@@ -2,12 +2,15 @@
 #ifndef _ENEMY_SPAWNER_H_
 #define _ENEMY_SPAWNER_H_
 
-#include "Component.h"
+#include "Entity.h"
+#include "IRenderable.h"
 class EnemyUFO;
 class EnemyShip;
 
-class EnemySpawner : public Component
+class EnemySpawner : public Entity, public IRenderable
 {
+	DECLARE_DYNAMIC_DERIVED_CLASS(EnemySpawner, Entity)
+
 private:
 	std::list<EnemyUFO*> ufos;
 	std::list<EnemyShip*> ships;
@@ -17,10 +20,11 @@ public:
 	EnemySpawner();
 	~EnemySpawner();
 
+	void Initialize() override;
 	void Update();
 	void Destroy();
 	void SpawnEnemies();
-	void Load();
+	void Load(json::JSON& _json);
 	void AddShip(EnemyShip* _enemy) { ships.push_back(_enemy); }
 	void RemoveShip(EnemyShip* _enemy) { ships.remove(_enemy); }
 	void AddUFO(EnemyUFO* _enemy) { ufos.push_back(_enemy); }

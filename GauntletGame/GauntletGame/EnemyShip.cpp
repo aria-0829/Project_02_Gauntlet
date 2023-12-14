@@ -1,14 +1,6 @@
 #include "GameCore.h"
 
-EnemyShip::EnemyShip()
-{
-	std::cout << "EnemyShip Created" << std::endl;
-}
-
-EnemyShip::~EnemyShip()
-{
-	std::cout << "EnemyShip Deleted" << std::endl;
-}
+IMPLEMENT_DYNAMIC_CLASS(EnemyShip)
 
 void EnemyShip::Initialize()
 {
@@ -25,6 +17,8 @@ void EnemyShip::Initialize()
 
 void EnemyShip::Update()
 {
+	Entity::Update();
+
 	dstrect.y += speed;
 
 	static int frameCount = 0;
@@ -34,8 +28,10 @@ void EnemyShip::Update()
 	{
 		EnemyProjectile* projectile = new EnemyProjectile();
 		enemyProjectiles.push_back(projectile);
-		projectile->Load();
-		projectile->Initialize((dstrect.x + imageWidth / 2), dstrect.y + imageHeight);
+		projectile->Load(enemyProjectileData);
+		projectile->SetPositionX(dstrect.x + imageWidth / 2);
+		projectile->SetPositionY(dstrect.y + imageHeight);
+		projectile->Initialize();
 	}
 
 	++frameCount;
@@ -53,22 +49,20 @@ void EnemyShip::Update()
 				return true; //Remove the projectile
 			}
 
-			//Get the collision circles
-			Circle projectileCollider = projectile->GetCollisionCircle();
-			Circle playerCollider = Game::Instance().GetPlayer()->GetCollisionCircle();
+	//		//Get the collision circles
+	//		Circle projectileCollider = projectile->GetCollisionCircle();
+	//		Circle playerCollider = Scene::Instance().GetPlayer()->GetCollisionCircle();
 
-			//Check if the projectile collides with the player
-			if (CollisionDetection::Instance().CheckCollision(playerCollider, projectileCollider))
-			{
-				Game::Instance().GetPlayer()->Damaged();
-				projectile->Destroy();
-				delete projectile;
-				return true; //Remove the projectile
-			}
+	//		//Check if the projectile collides with the player
+	//		if (CollisionDetection::Instance().CheckCollision(playerCollider, projectileCollider))
+	//		{
+	//			Scene::Instance().GetPlayer()->Damaged();
+	//			projectile->Destroy();
+	//			delete projectile;
+	//			return true; //Remove the projectile
+	//		}
 			return false; //Keep the projectile
 		});
-
-	collisionCircle = { dstrect.x, dstrect.y, dstrect.w / 2 }; //Update collision circle
 }
 
 void EnemyShip::Destroy()
@@ -80,13 +74,7 @@ void EnemyShip::Destroy()
 	}
 	enemyProjectiles.clear();
 
-	SDL_DestroyTexture(tex);
-	tex = nullptr;
-}
-
-void EnemyShip::Render()
-{
-	SDL_RenderCopy(RenderSystem::Instance().GetRenderer(), tex, NULL, &dstrect);
+	Entity::Destroy();
 }
 
 void EnemyShip::Load(json::JSON& _json)
@@ -113,6 +101,11 @@ void EnemyShip::Load(json::JSON& _json)
 		if (shipData.hasKey("imageHeight"))
 		{
 			imageHeight = shipData["imageHeight"].ToInt();  //Load image height
+		}
+
+		if (shipData.hasKey("EnemyProjectile"))
+		{
+			enemyProjectileData = shipData["EnemyProjectile"];  //Load the player projectile data
 		}
 	}
 }

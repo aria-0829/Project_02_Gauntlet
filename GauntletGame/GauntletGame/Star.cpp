@@ -1,12 +1,6 @@
 #include "GameCore.h"
 
-Star::Star()
-{
-}
-
-Star::~Star()
-{
-}
+IMPLEMENT_DYNAMIC_CLASS(Star)
 
 void Star::Initialize()
 {
@@ -32,17 +26,6 @@ void Star::Initialize()
 void Star::Update()
 {
 	dstrect.y += speed; //Move down
-}
-
-void Star::Destroy()
-{
-	SDL_DestroyTexture(tex);
-	tex = nullptr;
-}
-
-void Star::Render()
-{
-	SDL_RenderCopy(RenderSystem::Instance().GetRenderer(), tex, NULL, &dstrect);
 }
 
 void Star::Load(json::JSON& _json)

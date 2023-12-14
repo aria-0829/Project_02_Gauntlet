@@ -1,23 +1,21 @@
 #include "EngineCore.h"
+#include "Object.h"
 
-void Object::Initialize() 
-{
-	initialized = true;
-}
+IMPLEMENT_ABSTRACT_CLASS(Object)
 
-void Object::Destroy() 
-{
-
-}
-
-void Object::Load(const json::JSON& objectNode) 
-{
-	if (objectNode.hasKey("name")) 
-	{
-		name = objectNode.at("name").ToString();
-	}
-	if (objectNode.hasKey("id")) 
-	{
-		id = objectNode.at("id").ToInt();
-	}
-}
+//Object::Object()
+//{
+//}
+//
+//Object::Object(std::string guid) : guid(std::move(guid))
+//{
+//}
+//
+//Object::Object(std::string guid, std::string name) : name(std::move(name)), guid(std::move(guid))
+//{
+//}
+//
+//void Object::Load(json::JSON& node)
+//{
+//
+//}

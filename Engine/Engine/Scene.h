@@ -1,29 +1,46 @@
 #pragma once
-
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-class Entity;
+//class Background;
+class Player;
+//class EnemySpawner;
+//class AsteroidSpawner;
 
-class Scene 
+class Scene
 {
-	friend class SceneManager;
-
 private:
-	std::list<Entity*> entities;
-	std::string name;
-	int id;
+	static Scene* instance;
 
-protected:
-	void Initialize();
-	void Destroy();
-	void Update();
-	void Load(json::JSON& _json);
+	std::list<Entity*> entities;
+
+	/*Background* background1 = nullptr;
+	Player* player = nullptr;
+	EnemySpawner* enemySpawner = nullptr;
+	AsteroidSpawner* asteroidSpawner = nullptr;*/
+
+	inline explicit Scene() = default;
+	inline ~Scene() = default;
+	inline explicit Scene(Scene const&) = delete;
+	inline Scene& operator=(Scene const&) = delete;
 
 public:
-	Entity* CreateEntity();
-	void RemoveEntity(Entity* _entity);
-	Entity* FindEntityById(int id);
-};
+	static Scene& Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new Scene();
+		}
+		return *instance;
+	}
 
+	void Initialize();
+	void Update();
+	void Destroy();
+	void Load(json::JSON& _json);
+	Entity* CreateEntity(const std::string& _entityName);
+	Entity* GetEntityByName(std::string _entityName);
+	void AddEntity(Entity* _entity);
+	void CheckCollisions();
+};
 #endif // !_SCENE_H_

@@ -1,4 +1,3 @@
-#include "AssetManager.h"
 #include "EngineCore.h"
 
 AssetManager* AssetManager::instance = nullptr;

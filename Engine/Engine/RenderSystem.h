@@ -2,21 +2,20 @@
 #ifndef _RENDER_SYSTEM_H_
 #define _RENDER_SYSTEM_H_
 
-class Renderable;
+class IRenderable;
 
 class RenderSystem
 {
 private:
 	static RenderSystem* instance;
 
-	std::string name = "GAME";
 	int width = 0;
 	int height = 0;
 	bool fullscreen = false;
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 
-	std::list<Renderable*> renderables;
+	std::list<IRenderable*> iRenderables;
 
 	inline explicit RenderSystem() = default;
 	inline ~RenderSystem() = default;
@@ -37,13 +36,12 @@ public:
 	void Update();
 	void Destroy();
 	void Load(json::JSON& _json);
-
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
 	SDL_Renderer* GetRenderer() { return renderer; }
 
-	void AddRenderable(Renderable* _renderable) { renderables.push_back(_renderable); }
-	void RemoveRenderable(Renderable* _renderable) { renderables.remove(_renderable); }
+	void AddIRenderable(IRenderable* _iRenderable) { iRenderables.push_back(_iRenderable); }
+	void RemoveIRenderable(IRenderable* _iRenderable) { iRenderables.remove(_iRenderable); }
 };
 
 #endif // !_RENDERER_H_

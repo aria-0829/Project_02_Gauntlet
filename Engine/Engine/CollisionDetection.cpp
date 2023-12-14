@@ -1,4 +1,3 @@
-#include "CollisionDetection.h"
 #include "EngineCore.h"
 
 CollisionDetection* CollisionDetection::instance = nullptr;

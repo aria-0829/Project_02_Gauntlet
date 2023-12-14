@@ -1,73 +1,137 @@
 #include "EngineCore.h"
 
-void Scene::Initialize() 
+Scene* Scene::instance = nullptr;
+
+void Scene::Initialize()
 {
-	for (const auto& e: entities) 
+	for (auto& entity : entities)
 	{
-		e->Initialize();
+		entity->Initialize();
 	}
 }
 
-void Scene::Destroy() 
+void Scene::Update()
 {
-	for (const auto& e: entities) 
+	for (auto& entity : entities)
 	{
-		e->Destroy();
-		delete e;
+		entity->Update();
+	}
+
+	CheckCollisions();
+}
+
+void Scene::Destroy()
+{
+	for (auto& entity : entities)
+	{
+		entity->Destroy();
+		delete &entity;
 	}
 	entities.clear();
 }
 
-void Scene::Update() 
-{
-	for (const auto& e: entities) 
-	{
-		e->Update();
-	}
-}
-
 void Scene::Load(json::JSON& _json)
 {
-	/*for (auto& componentData : _json.ArrayRange())
+	if (_json.hasKey("Game"))
 	{
-		Component* component = new Component();
-		AddComponent(component);
-		component->Load(componentData);
-	}*/
-	if (_json.hasKey("Player"))
-	{
-		json::JSON playerData = _json["Player"];
+		json::JSON gameData = _json["Game"];
 
-		//player = new Player();
-		//player->Load(playerData);
-		std::cout << playerData.dump() << std::endl << std::endl;
-	}
-	if (_json.hasKey("Background"))
-	{
-		json::JSON backgroundData = _json["Background"];
+		if (gameData.hasKey("scenefile"))
+		{
+			std::string scenefile = gameData["scenefile"].ToString();
 
-		/*background1 = new Background();
-		background1->Load(backgroundData);
-		background2 = new Background();
-		background2->Load(backgroundData);*/
+			std::ifstream inputStream(scenefile);
+			std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
+			json::JSON sceneData = json::JSON::Load(str);
+
+			if (sceneData.hasKey("Entities"))
+			{
+				json::JSON entitiesJSON = sceneData["Entities"];
+				for (json::JSON& entityJSON : entitiesJSON.ArrayRange())
+				{
+					std::string entityName = entityJSON["ClassName"].ToString();
+					
+					Entity* entity = CreateEntity(entityName);
+					entity->SetName(entityName);
+					entity->Load(entityJSON["ClassData"]);
+
+				}
+			}
+		}
 	}
 }
 
-Entity* Scene::CreateEntity() 
+Entity* Scene::CreateEntity(const std::string& _entityName)
 {
-	const auto entity = new Entity();
+	const auto entity = (Entity*)CreateObject(_entityName.c_str());
+	//entity->ownerScene = this;
 	entities.push_back(entity);
+	std::cout << "Created entity" << std::endl;
 
 	return entity;
 }
 
-void Scene::RemoveEntity(Entity* _entity) 
+Entity* Scene::GetEntityByName(std::string _entityName)
 {
-	entities.remove(_entity);
+	for (auto& entity : entities)
+	{
+		if (entity->GetName() == _entityName)
+		{
+			return entity;
+		}
+	}
+
+	std::cout << "EntityByName not found" << std::endl;
+	return nullptr;
 }
 
-Entity* Scene::FindEntityById(int id) 
+void Scene::AddEntity(Entity* _entity)
 {
-	// TODO: Implement Finding Entities
-	return nullptr;
+	entities.push_back(_entity);
+	//RenderSystem::Instance().AddIRenderable(_entity);
+	std::cout << "Added entity" << std::endl;
+}
+
+void Scene::CheckCollisions()
+{
+	//std::list<Projectile*> projectilesToRemove;
+
+	////Iterate over projectiles of player
+	//for (const auto& projectile : player->GetProjectiles())
+	//{
+	//	//Iterate over enemyUFO of enemySpawner
+	//	for (const auto& enemyUFO : enemySpawner->GetUFOs())
+	//	{
+	//		if (CollisionDetection::Instance().CheckCollision(projectile->GetCollisionCircle(), enemyUFO->GetCollisionCircle()))
+	//		{
+	//			enemySpawner->RemoveUFO(enemyUFO);
+	//			enemyUFO->Destroy();
+	//			delete enemyUFO;
+
+	//			player->RemoveProjectile(projectile);
+	//			projectile->Destroy();
+	//			delete projectile;
+	//		}
+	//	}
+
+	//	//Iterate over enemyShip of enemySpawner
+	//	for (const auto& enemyShip : enemySpawner->GetShips())
+	//	{
+	//		if (CollisionDetection::Instance().CheckCollision(projectile->GetCollisionCircle(), enemyShip->GetCollisionCircle()))
+	//		{
+	//			enemySpawner->RemoveShip(enemyShip);
+	//			enemyShip->Destroy();
+	//			delete enemyShip;
+
+	//			player->RemoveProjectile(projectile);
+	//			projectile->Destroy();
+	//			delete projectile;
+	//		}
+	//	}
+	//}
+	//for (auto projectile : projectilesToRemove)
+	//{
+	//	player->RemoveProjectile(projectile);
+	//	delete projectile;
+	//}
 }

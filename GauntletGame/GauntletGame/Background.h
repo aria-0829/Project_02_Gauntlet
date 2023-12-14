@@ -2,27 +2,20 @@
 #ifndef _BACKGROUND_H_
 #define _BACKGROUND_H_
 
-#include "Component.h"
+#include "Entity.h"
+#include "IRenderable.h"
 
-class Background : public Component
+class Background : public Entity, public IRenderable
 {
-private:
-	int scrollSpeed = 0;
-	std::string imagePath = "";
-	SDL_Texture* tex = nullptr;
-	SDL_Rect dstrect = { 0, 0, 0, 0 };
+	DECLARE_DYNAMIC_DERIVED_CLASS(Background, Entity)																			\
 
 public:
-	Background();
-	~Background();
+	Background() = default;
+	~Background() override = default;
 
-	void Initialize(int posY);
-	void Update();
-	void Destroy();
-	void Render();
+	void Initialize() override;
+	void Update() override;
 	void Load(json::JSON& _json);
 };
 
 #endif // !_BACKGROUND_H_
-
-

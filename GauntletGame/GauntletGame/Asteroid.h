@@ -2,30 +2,20 @@
 #ifndef _ASTEROID_H_
 #define _ASTEROID_H_
 
-#include "Component.h"
+#include "Entity.h"
+#include "IRenderable.h"
 
-class Asteroid : public Component
+class Asteroid : public Entity, public IRenderable
 {
-private:
-	int speed = 0;
-	int imageWidth = 0;
-	int imageHeight = 0;
-	std::string imagePath = "";
-	SDL_Texture* tex = nullptr;
-	SDL_Rect dstrect = { 0, 0, 0, 0 };
-	Circle collisionCircle = { 0, 0, 0 };
+	DECLARE_DYNAMIC_DERIVED_CLASS(Asteroid, Entity)
 
 public:
-	Asteroid();
-	~Asteroid();
+	Asteroid() = default;
+	~Asteroid() override = default;
 
 	void Initialize();
 	void Update();
-	void Destroy();
-	void Render();
 	void Load(json::JSON& _json);
-	int GetPositionY() { return dstrect.y; }
-	Circle GetCollisionCircle() const { return collisionCircle; }
 };
 #endif // !_ASTEROID_H_
 

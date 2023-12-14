@@ -1,15 +1,84 @@
 {
-  "Player": {
-    "lives": 3,
-    "speed": 5,
-    "imagePath": "../Resources/Mainplayer/player.png",
-    "imageWidth": 48,
-    "imageHeight": 48
-  },
-  "Background": {
-    "scrollSpeed": 2,
-    "imagePath": "../Resources/Background/backgroundColor.png",
-    "imageWidth": 256,
-    "imageHeight": 256
-  }
+    "Entities": [
+        {
+            "ClassName": "Background",
+            "Position": {
+                "x": 0,
+                "y": 0
+            },
+            "ClassData": {
+                "speed": 0,
+                "imagePath": "../GameResources/Dungeon/Dungeon.png",
+                "imageWidth": 256,
+                "imageHeight": 256
+            }
+        },
+        {
+            "ClassName": "Player",
+            "Position": {
+                "x": 0,
+                "y": 0
+            },
+            "ClassData": {
+                "lives": 3,
+                "speed": 5,
+                "imagePath": "../GameResources/Witch/Front/Front-Shoot (3).png",
+                "imageWidth": 48,
+                "imageHeight": 48,
+                "Projectile": {
+                    "speed": 5,
+                    "imagePath": "../GameResources/Witch/Projectile/Projectile-Projectile (1).png",
+                    "imageWidth": 5,
+                    "imageHeight": 17
+                }
+            }
+        },
+        {
+            "ClassName": "EnemySpawner",
+            "Position": {
+                "x": 0,
+                "y": 0
+            },
+            "ClassData": {
+                "EnemyShip": {
+                    "speed": 3,
+                    "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
+                    "imageWidth": 64,
+                    "imageHeight": 64,
+                    "EnemyProjectile": {
+                        "speed": 5,
+                        "imagePath": "../GameResources/Dungeon/objects/Skeleton1.png",
+                        "imageWidth": 5,
+                        "imageHeight": 17
+                    }
+                },
+                "EnemyUFO": {
+                    "speed": 2,
+                    "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
+                    "imageWidth": 52,
+                    "imageHeight": 52
+                }
+            }
+        },
+        {
+            "ClassName": "AsteroidSpawner",
+            "Position": {
+                "x": 0,
+                "y": 0
+            },
+            "ClassData": {
+                "Asteroid": {
+                    "speed": 1,
+                    "imagePath": "GameResources/Dungeon/objects/Barrel (1).png",
+                    "imageWidth": 64,
+                    "imageHeight": 64
+                },
+                "Star": {
+                    "imagePath": "GameResources/Dungeon/objects/Crate.png",
+                    "imageWidth": 23,
+                    "imageHeight": 21
+                }
+            }
+        }
+    ]
 }

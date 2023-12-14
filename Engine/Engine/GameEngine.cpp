@@ -1,5 +1,4 @@
 #include "EngineCore.h"
-#include "GameEngine.h"
 
 GameEngine* GameEngine::instance = nullptr;
 
@@ -12,9 +11,12 @@ void GameEngine::Initialize()
 
 	//GameTime::Instance().Initialize();
 	AssetManager::Instance().Initialize();
+
 	RenderSystem::Instance().Load(documentData);
 	RenderSystem::Instance().Initialize();
-	SceneManager::Instance().Load(documentData);
+
+	Scene::Instance().Load(documentData);
+	Scene::Instance().Initialize();
 
 	std::cout << "Game Initialized" << std::endl << std::endl;
 }

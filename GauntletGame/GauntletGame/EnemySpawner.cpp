@@ -1,5 +1,7 @@
 #include "GameCore.h"
 
+IMPLEMENT_DYNAMIC_CLASS(EnemySpawner)
+
 EnemySpawner::EnemySpawner()
 {
 	std::cout << "Enemy Spawner Created" << std::endl;
@@ -8,6 +10,10 @@ EnemySpawner::EnemySpawner()
 EnemySpawner::~EnemySpawner()
 {
 	std::cout << "Enemy Spawner Deleted" << std::endl;
+}
+
+void EnemySpawner::Initialize()
+{
 }
 
 void EnemySpawner::Update()
@@ -28,18 +34,18 @@ void EnemySpawner::Update()
 			return true; //Remove the ship
 		}
 
-		//Get the collision circles
-		Circle shipCollider = ship->GetCollisionCircle();
-		Circle playerCollider = Game::Instance().GetPlayer()->GetCollisionCircle();
+	//	//Get the collision circles
+	//	Circle shipCollider = ship->GetCollisionCircle();
+	//	Circle playerCollider = Scene::Instance().GetPlayer()->GetCollisionCircle();
 
-		//Check if the ship collides with the player
-		if (CollisionDetection::Instance().CheckCollision(playerCollider, shipCollider))
-		{
-			Game::Instance().GetPlayer()->Damaged();
-			ship->Destroy();
-			delete ship;
-			return true; //Remove the ship
-		}
+	//	//Check if the ship collides with the player
+	//	if (CollisionDetection::Instance().CheckCollision(playerCollider, shipCollider))
+	//	{
+	//		Scene::Instance().GetPlayer()->Damaged();
+	//		ship->Destroy();
+	//		delete ship;
+	//		return true; //Remove the ship
+	//	}
 
 		return false; //Keep the ship
 	});
@@ -50,26 +56,26 @@ void EnemySpawner::Update()
 			ufo->Update();
 			ufo->Render();
 
-			//Get the collision circles
-			Circle ufoCollider = ufo->GetCollisionCircle();
-			Circle playerCollider = Game::Instance().GetPlayer()->GetCollisionCircle();
+	//		//Get the collision circles
+	//		Circle ufoCollider = ufo->GetCollisionCircle();
+	//		Circle playerCollider = Scene::Instance().GetPlayer()->GetCollisionCircle();
 
-			//Check if the ufo collides with the player
-			if (CollisionDetection::Instance().CheckCollision(playerCollider, ufoCollider))
-			{
-				Game::Instance().GetPlayer()->Damaged();
-				ufo->Destroy();
-				delete ufo;
-				return true; //Remove the ufo
-			}
+	//		//Check if the ufo collides with the player
+	//		if (CollisionDetection::Instance().CheckCollision(playerCollider, ufoCollider))
+	//		{
+	//			Scene::Instance().GetPlayer()->Damaged();
+	//			ufo->Destroy();
+	//			delete ufo;
+	//			return true; //Remove the ufo
+	//		}
 
-			//Check if the ufo is out of the window
-			//if (ufo->GetPositionY() > Renderer::Instance().GetHeight())
-			//{
-			//	ufo->Destroy();
-			//	delete ufo;
-			//	return true; //Remove the ufo
-			//}
+	//		//Check if the ufo is out of the window
+	//		//if (ufo->GetPositionY() > Renderer::Instance().GetHeight())
+	//		//{
+	//		//	ufo->Destroy();
+	//		//	delete ufo;
+	//		//	return true; //Remove the ufo
+	//		//}
 			return false; //Keep the ufo
 		});
 }
@@ -116,15 +122,10 @@ void EnemySpawner::Destroy()
 
 }
 
-void EnemySpawner::Load()
+void EnemySpawner::Load(json::JSON& _json)
 {
-	std::ifstream inputStream("../Data/Enemies.json");
-	std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
-	json::JSON documentData = json::JSON::Load(str);
-
-	if (documentData.hasKey("Enemies"))
-	{
-		enemiesData = documentData["Enemies"];
-	}
+	
+	enemiesData = _json;
+	
 }
 

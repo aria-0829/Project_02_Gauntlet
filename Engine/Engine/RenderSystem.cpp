@@ -1,16 +1,12 @@
 #include "EngineCore.h"
 
-#include "GameEngine.h"
-
 RenderSystem* RenderSystem::instance = nullptr;
 
 void RenderSystem::Initialize()
 {
 	//Create window and RenderSystem
-	window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, fullscreen);
+	window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, fullscreen);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-	//Game::Instance().Initialize();
 
 	std::cout << "RenderSystem Initialized" << std::endl;
 }
@@ -24,7 +20,7 @@ void RenderSystem::Update()
 	
 	if (frameDelay > frameTime)
 	{
-	SDL_Delay(frameDelay - frameTime);
+		SDL_Delay(frameDelay - frameTime);
 	}
 
 	SDL_Event event;
@@ -49,12 +45,8 @@ void RenderSystem::Update()
 	SDL_RenderClear(renderer);
 
 	// Render things here
-	//Game::Instance().Update();
-	//Game::Instance().GetPlayer()->Render();
-	for (Renderable* renderable : renderables)
-	{
-		renderable->Render();
-	}
+	Scene::Instance().Update();
+	Scene::Instance().GetEntityByName("Player")->Render();
 
 	SDL_RenderPresent(renderer);
 }
@@ -66,7 +58,7 @@ void RenderSystem::Destroy()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 
-	//Game::Instance().Destroy();
+	Scene::Instance().Destroy();
 
 	if (instance != nullptr)
 	{
@@ -82,10 +74,6 @@ void RenderSystem::Load(json::JSON& _json)
 	{
 		json::JSON renderSettings = _json["RenderSettings"];
 
-		if (renderSettings.hasKey("name"))
-		{
-			name = renderSettings["name"].ToString();
-		}
 		if (renderSettings.hasKey("width"))
 		{
 			width = renderSettings["width"].ToInt();

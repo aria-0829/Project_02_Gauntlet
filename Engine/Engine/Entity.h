@@ -4,30 +4,39 @@
 #define _ENTITY_H_
 
 #include "Object.h"
-class Component;
-class Scene;
 
-class Entity : public Object 
+class Entity : public Object
 {
-	friend class Scene;
-
-private:
-	std::list<Component*> components;
-	//Transform transform;
+	DECLARE_DYNAMIC_DERIVED_CLASS(Entity, Object)
 
 protected:
-	Entity() = default;
-	~Entity() override = default;
-	void Initialize() override;
-	void Destroy() override;
-	virtual void Update();
+	std::string name = "";
+	int speed = 0;
+	int imageWidth = 0;
+	int imageHeight = 0;
+	std::string imagePath = "";
+	SDL_Texture* tex = nullptr;
+	SDL_Rect dstrect = { 0, 0, 0, 0 };
+	Circle collisionCircle = { 0, 0, 0 };
+	int posX = 0;
+	int posY = 0;
 
 public:
-	void Load(const json::JSON&) override;
-	Component* CreateComponent(std::string _componentType);
-	void RemoveComponent(Component* _component);
+	Entity() = default;
+	virtual ~Entity() = default;
 
-	//const Transform* GetTransform() { return &transform; }
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Destroy();
+	virtual void Render();
+	virtual void Load(json::JSON& _json);
+	int GetPositionY() { return dstrect.y; }
+	void SetPositionX(int _x) { posX = _x; }
+	void SetPositionY(int _y) { posY = _y; }
+	std::string GetName() { return name; }
+	void SetName(std::string _name) { name = _name; }
+
+	//Circle GetCollisionCircle() const { return collisionCircle; }
 };
 
 #endif // !_ENTITY_H_

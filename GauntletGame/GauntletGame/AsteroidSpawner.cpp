@@ -1,5 +1,7 @@
 #include "GameCore.h"
 
+IMPLEMENT_DYNAMIC_CLASS(AsteroidSpawner)
+
 AsteroidSpawner::AsteroidSpawner()
 {
 	std::cout << "Asteroid Spawner Created" << std::endl;
@@ -8,6 +10,10 @@ AsteroidSpawner::AsteroidSpawner()
 AsteroidSpawner::~AsteroidSpawner()
 {
 	std::cout << "Asteroid Spawner Deleted" << std::endl;
+}
+
+void AsteroidSpawner::Initialize()
+{
 }
 
 void AsteroidSpawner::Update()
@@ -28,33 +34,33 @@ void AsteroidSpawner::Update()
 			return true; //Remove the asteroid
 		}
 
-		//Get the collision circles
-		Circle asteroidCollider = asteroid->GetCollisionCircle();
-		Circle playerCollider = Game::Instance().GetPlayer()->GetCollisionCircle();
+	//	//Get the collision circles
+	//	Circle asteroidCollider = asteroid->GetCollisionCircle();
+	//	Circle playerCollider = Scene::Instance().GetPlayer()->GetCollisionCircle();
 
-		//Check if the asteroid collides with the player
-		if (CollisionDetection::Instance().CheckCollision(playerCollider, asteroidCollider))
-		{
-			Game::Instance().GetPlayer()->Damaged();
-			asteroid->Destroy();
-			delete asteroid;
-			return true; //Remove the asteroid
-		}
+	//	//Check if the asteroid collides with the player
+	//	if (CollisionDetection::Instance().CheckCollision(playerCollider, asteroidCollider))
+	//	{
+	//		Scene::Instance().GetPlayer()->Damaged();
+	//		asteroid->Destroy();
+	//		delete asteroid;
+	//		return true; //Remove the asteroid
+	//	}
 
-		//Check if the asteroid collides with the player's projectiles
-		for (const auto& projectile : Game::Instance().GetPlayer()->GetProjectiles())
-		{
-			if (CollisionDetection::Instance().CheckCollision(projectile->GetCollisionCircle(), asteroidCollider))
-			{
-				Game::Instance().GetPlayer()->RemoveProjectile(projectile);
-				projectile->Destroy();
-				delete projectile; //Remove the projectile
+	//	//Check if the asteroid collides with the player's projectiles
+	//	for (const auto& projectile : Scene::Instance().GetPlayer()->GetProjectiles())
+	//	{
+	//		if (CollisionDetection::Instance().CheckCollision(projectile->GetCollisionCircle(), asteroidCollider))
+	//		{
+	//			Scene::Instance().GetPlayer()->RemoveProjectile(projectile);
+	//			projectile->Destroy();
+	//			delete projectile; //Remove the projectile
 
-				asteroid->Destroy();
-				delete asteroid;
-				return true; //Remove the asteroid
-			}
-		}
+	//			asteroid->Destroy();
+	//			delete asteroid;
+	//			return true; //Remove the asteroid
+	//		}
+	//	}
 
 		return false; //Keep the asteroid
 	});
@@ -135,26 +141,16 @@ void AsteroidSpawner::SpawnStars()
 	++frameCount;
 }
 
-void AsteroidSpawner::Load()
+void AsteroidSpawner::Load(json::JSON& _json)
 {
-	std::ifstream inputStream("../Data/Asteroid.json");
-	std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
-	json::JSON documentData = json::JSON::Load(str);
-
-	//std::cout << documentData.dump() << std::endl;
-
-	if (documentData.hasKey("Asteroid"))
+	if (_json.hasKey("Asteroid"))
 	{
-		asteroidData = documentData["Asteroid"];
+		asteroidData = _json["Asteroid"];
 	}
-
-	std::ifstream inputStreamStar("../Data/Star.json");
-	std::string strStar((std::istreambuf_iterator<char>(inputStreamStar)), std::istreambuf_iterator<char>());
-	json::JSON documentDataStar = json::JSON::Load(strStar);
-
-	if (documentDataStar.hasKey("Star"))
+	if (_json.hasKey("Star"))
 	{
-		starData = documentDataStar["Star"];
+		starData = _json["Star"];
 	}
+	
 }
 

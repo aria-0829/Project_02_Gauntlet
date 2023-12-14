@@ -31,23 +31,17 @@
 #include "TypeClass.h"
 
 // Engine Stuff
-//#include "GameEngine.h"
+#include "GameEngine.h"
 #include "GameTime.h"
+
 #include "AssetManager.h"
+#include "RenderSystem.h"
+#include "IRenderable.h"
 
 #include "CollisionDetection.h"
 #include "Circle.h"
 
-#include "RenderSystem.h"
-#include "Renderable.h"
-#include "Sprite.h"
-//#include "AnimatedSprite.h"
-//#include "Animation.h"
-#include "UI.h"
-
-#include "SceneManager.h"
-#include "Scene.h"
-#include "Object.h"
 #include "Entity.h"
-#include "Component.h"
-//#include "Transform.h"
+#include "Object.h"
+#include "Scene.h"
+

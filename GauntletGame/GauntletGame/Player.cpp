@@ -1,14 +1,6 @@
 #include "GameCore.h"
 
-Player::Player()
-{
-	std::cout << "Player Created" << std::endl;
-}
-
-Player::~Player()
-{
-	std::cout << "Player Deleted" << std::endl;
-}
+IMPLEMENT_DYNAMIC_CLASS(Player)
 
 void Player::Initialize()
 {
@@ -17,6 +9,7 @@ void Player::Initialize()
 
 	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
 	dstrect = { windowWidth / 2, (windowHeight - imageHeight), imageWidth, imageHeight};  //Player starting position at the bottom middle of the window
+	std::cout << "Player Initialized" << std::endl << std::endl;
 }
 
 void Player::Update()
@@ -73,8 +66,7 @@ void Player::Destroy()
 	}
 	projectiles.clear();
 
-	SDL_DestroyTexture(tex);
-	tex = nullptr;
+	Entity::Destroy();
 }
 
 
@@ -87,8 +79,10 @@ void Player::Shoot()
 	{
 		Projectile* projectile = new Projectile();
 		AddProjectile(projectile);
-		projectile->Load();
-		projectile->Initialize((dstrect.x + imageWidth /2), dstrect.y);
+		projectile->Load(projectileData);
+		projectile->SetPositionX(dstrect.x + imageWidth / 2);
+		projectile->SetPositionY(dstrect.y);
+		projectile->Initialize();
 	}
 
 	++frameCount;
@@ -133,34 +127,35 @@ void Player::Render()
 
 void Player::Load(json::JSON& _json)  //Load player data from json file
 {
-	if (_json.hasKey("Player"))
+	if (_json.hasKey("lives"))
 	{
-		json::JSON playerData = _json["Player"];
-
-		if (playerData.hasKey("lives"))
-		{
-			lives = playerData["lives"].ToInt();  //Load the player lives
-			std::cout << "Lives: " << lives << std::endl;
-		}
-
-		if (playerData.hasKey("speed"))
-		{
-			speed = playerData["speed"].ToInt();  //Load the player speed
-		}
-
-		if (playerData.hasKey("imagePath"))
-		{
-			imagePath = playerData["imagePath"].ToString();  //Load the player image path
-		}
-
-		if (playerData.hasKey("imageWidth"))
-		{
-			imageWidth = playerData["imageWidth"].ToInt();  //Load the player image width
-		}
-
-		if (playerData.hasKey("imageHeight"))
-		{
-			imageHeight = playerData["imageHeight"].ToInt();  //Load the player image height
-		}
+		lives = _json["lives"].ToInt();  //Load the player lives
+		std::cout << "Lives: " << lives << std::endl;
 	}
+
+	if (_json.hasKey("speed"))
+	{
+		speed = _json["speed"].ToInt();  //Load the player speed
+	}
+
+	if (_json.hasKey("imagePath"))
+	{
+		imagePath = _json["imagePath"].ToString();  //Load the player image path
+	}
+
+	if (_json.hasKey("imageWidth"))
+	{
+		imageWidth = _json["imageWidth"].ToInt();  //Load the player image width
+	}
+
+	if (_json.hasKey("imageHeight"))
+	{
+		imageHeight = _json["imageHeight"].ToInt();  //Load the player image height
+	}
+
+	if (_json.hasKey("Projectile"))
+	{
+		projectileData = _json["Projectile"];  //Load the player projectile data
+	}
+	
 }

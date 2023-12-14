@@ -1,61 +1,33 @@
 #include "EngineCore.h"
 
-void Entity::Initialize() 
-{
-	Object::Initialize();
+IMPLEMENT_DYNAMIC_CLASS(Entity)
 
-	for (const auto& c: components) 
-	{
-		c->Initialize();
-	}
+void Entity::Initialize()
+{
+	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
+
+	dstrect = { posX, posY, imageWidth, imageHeight }; //Set position and size
+
+	std::cout << "Entity Initialized" << std::endl << std::endl;
 }
 
-void Entity::Update() 
+void Entity::Update()
 {
-	for (const auto& c: components) 
-	{
-		c->Update();
-	}
+	std::cout << "Entity Updating..." << std::endl << std::endl;
+	collisionCircle = { dstrect.x, dstrect.y, dstrect.h / 2 }; //Update collision circle
 }
 
-void Entity::Destroy() 
+void Entity::Destroy()
 {
-	for (auto& c: components) 
-	{
-		c->Destroy();
-		delete c;
-	}
-	components.clear();
-
-	Object::Destroy();
+	SDL_DestroyTexture(tex);
+	tex = nullptr;
 }
 
-void Entity::Load(const json::JSON& entityNode) 
+void Entity::Render()
 {
-	Object::Load(entityNode);
-
-	// TODO: Implement Entity loading
+	SDL_RenderCopy(RenderSystem::Instance().GetRenderer(), tex, NULL, &dstrect);
 }
 
-Component* Entity::CreateComponent(std::string _componentType) 
+void Entity::Load(json::JSON& _json)
 {
-	Component* component = nullptr;
-
-	// Component Creation is not currently implemented
-	_ASSERT(component != nullptr);
-	component->entity = this;
-
-	return component;
-}
-
-void Entity::RemoveComponent(Component* _component) 
-{
-	// Remove the Component from the list of Components.
-	components.remove(_component);
-
-	// Reset the Component's entity, if we're the Entity currently set.
-	if (_component->entity == this) 
-	{
-		_component->entity = nullptr;
-	}
 }

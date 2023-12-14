@@ -3,25 +3,20 @@
 #ifndef _OBJECT_H_
 #define _OBJECT_H_
 
-class Object 
+class Object
 {
-	bool initialized = false;
-	std::string name = "";
-	int id = 0;
+    DECLARE_ABSTRACT_BASE_CLASS(Object)
 
-protected:
-	Object() = default;
-	virtual ~Object() = default;
+//protected:
+//    Object() = default;
+//    virtual ~Object() = default;
+//
+//    virtual void Initialize() = 0;
+//    virtual void Destroy() {}
+//
+//public:
+//    virtual void Load(json::JSON&);
 
-	virtual void Initialize();
-	virtual void Destroy();
-
-public:
-	virtual void Load(const json::JSON&);
-
-	bool IsInitialized() const { return initialized; }
-	const std::string& GetName() const { return name; }
-	int GetId() const { return id; }
 };
 
 #endif // !_OBJECT_H_
