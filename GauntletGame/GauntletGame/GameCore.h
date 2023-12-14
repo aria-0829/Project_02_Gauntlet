@@ -1,19 +1,20 @@
 #pragma once
-
 #ifndef _GAME_CORE_H_
 #define _GAME_CORE_H_
 
 #include "EngineCore.h"
-#include "RenderSystem.h"
-#include "Scene.h"
-#include "Engine.h"
-#include "Entity.h"
-#include "InputSystem.h"
-#include "CollisionSystem.h"
-#include "Component.h"
+
 #include "Player.h"
-#include "GameOver.h"
-#include "AudioSystem.h"
-#include "AssetManager.h"
+#include "Projectile.h"
+
+#include "EnemySpawner.h"
+#include "EnemyUFO.h"
+#include "EnemyShip.h"
+#include "EnemyProjectile.h"
+
+#include "AsteroidSpawner.h"
+#include "Asteroid.h"
+#include "Background.h"
+#include "Star.h"
 
 #endif // !_GAME_CORE_H_

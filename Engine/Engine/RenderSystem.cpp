@@ -1,184 +1,93 @@
-/*
-* @RenderSystem
-*
-* Controls the SDL window along with its properties. Also responsible for
-* calling render on anything renderable.
-*/
-
 #include "EngineCore.h"
-#include "RenderSystem.h"
-#include "Renderable.h"
-#include "Scene.h"
 
-RenderSystem* RenderSystem::_instance = nullptr;
-
-RenderSystem& RenderSystem::Instance()
-{
-	if (_instance == nullptr)
-	{
-		_instance = new RenderSystem();
-	}
-	return *_instance;
-}
-
-RenderSystem::RenderSystem()
-{
-
-}
-
-RenderSystem::~RenderSystem()
-{
-
-}
+RenderSystem* RenderSystem::instance = nullptr;
 
 void RenderSystem::Initialize()
 {
-	//Pulls the window information from the RenderSettings file located in Assets
-	std::ifstream inputStream("../Assets/RenderSettings.json");
-	std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
-	json::JSON document = json::JSON::Load(str);
+	//Create window and RenderSystem
+	window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, fullscreen);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	//Checks for name in RenderSettings
-	if (document.hasKey("name"))
-	{
-		_name = document["name"].ToString();
-	}
-	else
-	{
-		std::cout << "Name wasn't found in RenderSettings. Going with the Default instead.";
-	}
-
-	//Checks for width in RenderSettings
-	if (document.hasKey("width"))
-	{
-		_width = document["width"].ToInt();
-	}
-	else
-	{
-		std::cout << "Width wasn't found in RenderSettings. Going with the Default instead.";
-	}
-
-	//Checks for height in RenderSettings
-	if (document.hasKey("height"))
-	{
-		_height = document["height"].ToInt();
-	}
-	else
-	{
-		std::cout << "Height wasn't found in RenderSettings. Going with the Default instead.";
-	}
-
-	//Checks for fullscreen in RenderSettings
-	if (document.hasKey("fullscreen"))
-	{
-		_fullScreen = document["fullScreen"].ToBool();
-	}
-	else
-	{
-		std::cout << "Fullscreen wasn't found in RenderSettings. Going with the Default instead.";
-	}
-
-	_window = SDL_CreateWindow(_name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _width, _height, _fullScreen);
-	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
-}
-
-void RenderSystem::Destroy()
-{
-	SDL_DestroyWindow(_window);
-	SDL_DestroyRenderer(_renderer);
-
-	delete _instance;
+	std::cout << "RenderSystem Initialized" << std::endl;
 }
 
 void RenderSystem::Update()
 {
-	SDL_RenderClear(_renderer);
-	SDL_SetRenderDrawColor(_renderer, _backgroundColor.r, _backgroundColor.g, _backgroundColor.b, _backgroundColor.a);
-
-	for (Renderable* renderable : _renderables)
+	int FPS = 60;
+	int frameDelay = 1000 / FPS;
+	Uint32 frameStart = SDL_GetTicks();
+	int frameTime = SDL_GetTicks() - frameStart;
+	
+	if (frameDelay > frameTime)
 	{
-		if (!renderable->ownerEntity->GetParentScene()->isEnabled)
+		SDL_Delay(frameDelay - frameTime);
+	}
+
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 		{
-			continue;
+			GameEngine::Instance().setGameRunning(false);
+			Destroy();
 		}
-		renderable->Render();
+		else
+		{
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				//GameEngine::Instance().setGameRunning(false);
+
+			}
+		}
 	}
 
-	SDL_RenderPresent(_renderer);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+
+	// Render things here
+	Scene::Instance().Update();
+	Scene::Instance().GetEntityByName("Player")->Render();
+
+	SDL_RenderPresent(renderer);
 }
 
-void RenderSystem::Load()
+void RenderSystem::Destroy()
 {
+	//Destroy window and renderer
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 
-}
+	Scene::Instance().Destroy();
 
-SDL_Window& RenderSystem::GetWindow()
-{
-	return *_window;
-}
-
-SDL_Renderer& RenderSystem::GetRenderer()
-{
-	return *_renderer;
-}
-
-/*
-* @AddRenderable
-*
-* When something renderable is created it calls this method and inserts
-* itself into the list of renderables so RenderSystem can call its Render method
-*/
-void RenderSystem::AddRenderable(Renderable* renderable)
-{
-	_renderables.push_back(renderable);
-}
-
-/*
-* @RemoveRenderable
-*
-* When a renderable is destroyed it removes itself from the renderables list using
-* this method so RenderSystem no longer will try to call render on it
-*/
-void RenderSystem::RemoveRenderable(Renderable* renderable)
-{
-	_renderables.remove(renderable);
-}
-
-/*
-* @WindowBackgroundColor
-*
-* Allows the user to set a new background color for the SDL Window by providing
-* RGB Values and an Alpha
-*/
-void RenderSystem::WindowBackgroundColor(int r, int g, int b, int a)
-{
-	_backgroundColor.r = r;
-	_backgroundColor.g = g;
-	_backgroundColor.b = b;
-	_backgroundColor.a = a;
-}
-
-/*
-* @WindowSize
-*
-* Allows the user to set a new width and height for the SDL Window. Won't apply if
-* the Window is in fullscreen mode.
-*/
-void RenderSystem::WindowSize(int width, int height)
-{
-	if (!_fullScreen)
+	if (instance != nullptr)
 	{
-		_width = width;
-		_height = height;
-		SDL_SetWindowSize(_window, _width, _height);
+		delete instance;
 	}
-	else
+
+	std::cout << "RenderSystem Destroyed" << std::endl;
+}
+
+void RenderSystem::Load(json::JSON& _json)
+{
+	if (_json.hasKey("RenderSettings"))
 	{
-		std::cout << "Can't resize a fullscreen window. Change the RenderSettings if you want to use this method." << std::endl;
+		json::JSON renderSettings = _json["RenderSettings"];
+
+		if (renderSettings.hasKey("width"))
+		{
+			width = renderSettings["width"].ToInt();
+		}
+
+		if (renderSettings.hasKey("height"))
+		{
+			height = renderSettings["height"].ToInt();
+		}
+
+		if (renderSettings.hasKey("fullscreen"))
+		{
+			fullscreen = renderSettings["fullscreen"].ToBool();
+		}
 	}
 }
 
-IVec2 RenderSystem::GetWindowSize() const
-{
-	return {static_cast<int>(_width), static_cast<int>(_height)};
-}

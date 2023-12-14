@@ -1,67 +1,46 @@
-// @file: Scene.h
-//
-// @brief: Header file for the Scene class. All entities are part of a Scene.
-//
-// @author: Divyanshu N Singh (DNS)
-// @date: 2023-11-29
-
 #pragma once
 #ifndef _SCENE_H_
+#define _SCENE_H_
 
-class Entity;
+//class Background;
+class Player;
+//class EnemySpawner;
+//class AsteroidSpawner;
 
-/**
- * @class Scene
- *
- * Scene class contains and manages all the entities within it.
- */
 class Scene
 {
 private:
-	std::string guid = "";
-	STRCODE uid = 0;
-	std::string name = "";
+	static Scene* instance;
 
-	std::list<Entity*> entitiesToBeAdded;
 	std::list<Entity*> entities;
-	std::list<Entity*> entitiesToDestroy;
 
-	// Keep a record of all the assets loaded by a scene
-	// as they get unloaded with the scene
-	std::list<std::string> assetsGUIDs;
+	/*Background* background1 = nullptr;
+	Player* player = nullptr;
+	EnemySpawner* enemySpawner = nullptr;
+	AsteroidSpawner* asteroidSpawner = nullptr;*/
 
-protected:
-	void Initialize();
-	void Load(json::JSON&);
-
-	void PreUpdate();
-	void Update();
-	void PostUpdate();
-
-	void Destroy();
+	inline explicit Scene() = default;
+	inline ~Scene() = default;
+	inline explicit Scene(Scene const&) = delete;
+	inline Scene& operator=(Scene const&) = delete;
 
 public:
-	// Only enabled scenes get updated & rendered
-	bool isEnabled = true;
+	static Scene& Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new Scene();
+		}
+		return *instance;
+	}
 
-	Scene();
-	Scene(std::string guid);
-	~Scene() {};
-
-	Entity* CreateEntity();
-	Entity* FindEntity(std::string entityGuid);
-	Entity* FindEntity(STRCODE entityId);
-	std::list<Entity*> FindEntityByName(std::string entityName);  // entities can have same name
-	std::list<Entity*> FindEntityWithComponent(std::string componentClassName);
-	bool RemoveEntity(std::string entityGuid);
-	bool RemoveEntity(STRCODE entityId);
-
-	// Getters
-	std::string& GetGUID();
-	STRCODE GetUID();
-	std::string& GetName();
-
-	friend class SceneManager;
+	void Initialize();
+	void Update();
+	void Destroy();
+	void Load(json::JSON& _json);
+	Entity* CreateEntity(const std::string& _entityName);
+	Entity* GetEntityByName(std::string _entityName);
+	void AddEntity(Entity* _entity);
+	void CheckCollisions();
 };
-
 #endif // !_SCENE_H_
