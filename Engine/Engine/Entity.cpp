@@ -8,7 +8,7 @@ void Entity::Initialize()
 
 	dstrect = { position.x, position.y, imageWidth, imageHeight }; //Set position and size
 
-	//std::cout << "Entity Initialized" << std::endl << std::endl;
+	std::cout << this->GetName() << " Initialized" << std::endl << std::endl;
 }
 
 void Entity::Update()
@@ -38,7 +38,8 @@ void Entity::Load(json::JSON& _json)
 		if (positionData.hasKey("x"))
 		{
 			position.x = positionData["x"].ToInt();
-			std::cout << "x: " << position.x << std::endl;
+
+			std::cout<< this->GetName() << ": Position: x: " << position.x << std::endl;
 		}
 		if (positionData.hasKey("y"))
 		{

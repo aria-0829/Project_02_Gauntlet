@@ -13,6 +13,7 @@ SDL_Texture* AssetManager::LoadTexture(const char* texturePath)
 
 	if (!tempSurface) {
 		std::cout << "Failed to load image: " << IMG_GetError() << std::endl;
+		std::cout << "From Image path: " << texturePath << std::endl;
 	}
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(RenderSystem::Instance().GetRenderer(), tempSurface);
 

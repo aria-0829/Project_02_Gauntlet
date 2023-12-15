@@ -25,7 +25,7 @@ void Scene::Render()
 	for (auto& entity : entities)
 	{
 		std::string name = entity->GetName();
-		std::cout << "Rendering: " << name << std::endl;
+		std::cout << "Scene::Render: " << name << std::endl;
 		entity->Render();
 	}
 }
@@ -35,7 +35,7 @@ void Scene::Destroy()
 	for (auto& entity : entities)
 	{
 		entity->Destroy();
-		delete &entity;
+		delete entity;
 	}
 	entities.clear();
 }
@@ -64,7 +64,6 @@ void Scene::Load(json::JSON& _json)
 					Entity* entity = CreateEntity(entityName);
 					entity->SetName(entityName);
 					entity->Load(entityJSON["ClassData"]);
-
 				}
 			}
 		}
@@ -76,7 +75,7 @@ Entity* Scene::CreateEntity(const std::string& _entityName)
 	const auto entity = (Entity*)CreateObject(_entityName.c_str());
 	//entity->ownerScene = this;
 	entities.push_back(entity);
-	std::cout << "Created entity" << std::endl;
+	std::cout << "Scene Created Entity" << std::endl;
 
 	return entity;
 }
