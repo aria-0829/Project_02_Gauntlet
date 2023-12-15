@@ -44,15 +44,15 @@
                 "imageWidth": 64,
                 "imageHeight": 64,
                 "SpawnInterval": 1,
-                "SpawnName": "Skeleton",
+                "SpawnName": "Ghost",
                 "SpawnData": {
                     "speed": 3,
-                    "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
+                    "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
                     "imageWidth": 64,
                     "imageHeight": 64,
                     "EnemyProjectile": {
                         "speed": 5,
-                        "imagePath": "../GameResources/Dungeon/objects/Skeleton1.png",
+                        "imagePath": "../GameResources/Dungeon/objects/Pot (1).png",
                         "imageWidth": 5,
                         "imageHeight": 17
                     }
@@ -70,10 +70,10 @@
                 "imageWidth": 140,
                 "imageHeight": 140,
                 "SpawnInterval": 2,
-                "SpawnName": "Ghost",
+                "SpawnName": "Skeleton",
                 "SpawnData": {
                     "speed": 3,
-                    "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
+                    "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
                     "imageWidth": 64,
                     "imageHeight": 64
                 }

@@ -6,22 +6,72 @@ void Ghost::Update()
 {
 	Entity::Update();
 
-	if (direction == 1)
+	dstrect.x -= speed;
+
+	static int frameCount = 0;
+	const int spawnInterval = 20;
+
+	if (frameCount % spawnInterval == 0)
 	{
-		//Moving from left to right
-		dstrect.x += speed;
-	}
-	else
-	{
-		//Moving from right to left
-		dstrect.x -= speed;
+		EnemyProjectile* projectile = new EnemyProjectile();
+		enemyProjectiles.push_back(projectile);
+		projectile->Load(enemyProjectileData);
+		projectile->SetPositionX(dstrect.x + imageWidth / 2);
+		projectile->SetPositionY(dstrect.y + imageHeight);
+		projectile->Initialize();
 	}
 
-	//Change direction if ufo is out of window
-	if (dstrect.x > RenderSystem::Instance().GetWidth() || dstrect.x < -imageWidth)
+	++frameCount;
+
+	enemyProjectiles.remove_if([](EnemyProjectile* projectile)
+		{
+			projectile->Update();
+			//projectile->Render();
+
+			//Check if the projectile is out of the window
+			if (projectile->GetPositionY() < 0)
+			{
+				projectile->Destroy();
+				delete projectile;
+				return true; //Remove the projectile
+			}
+
+	//		//Get the collision circles
+	//		Circle projectileCollider = projectile->GetCollisionCircle();
+	//		Circle playerCollider = Scene::Instance().GetPlayer()->GetCollisionCircle();
+
+	//		//Check if the projectile collides with the player
+	//		if (CollisionDetection::Instance().CheckCollision(playerCollider, projectileCollider))
+	//		{
+	//			Scene::Instance().GetPlayer()->Damaged();
+	//			projectile->Destroy();
+	//			delete projectile;
+	//			return true; //Remove the projectile
+	//		}
+			return false; //Keep the projectile
+		});
+}
+
+void Ghost::Render()
+{
+	Entity::Render();
+
+	for (auto projectile : enemyProjectiles)
 	{
-		direction *= -1;
+		projectile->Render();
 	}
+}
+
+void Ghost::Destroy()
+{
+	for (auto projectile : enemyProjectiles)
+	{
+		projectile->Destroy();
+		delete projectile;
+	}
+	enemyProjectiles.clear();
+
+	Entity::Destroy();
 }
 
 void Ghost::Load(json::JSON& _json)
@@ -45,4 +95,10 @@ void Ghost::Load(json::JSON& _json)
 	{
 		imageHeight = _json["imageHeight"].ToInt();  //Load image height
 	}
+
+	if (_json.hasKey("EnemyProjectile"))
+	{
+		enemyProjectileData = _json["EnemyProjectile"];  //Load the player projectile data
+	}
+	
 }

@@ -63,10 +63,10 @@
     <ClCompile Include="EnemyProjectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
+    <ClCompile Include="Ghost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ghost.cpp">
+    <ClCompile Include="Skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -96,10 +96,10 @@
     <ClInclude Include="EnemyProjectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skeleton.h">
+    <ClInclude Include="Ghost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ghost.h">
+    <ClInclude Include="Skeleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">

@@ -200,8 +200,8 @@
     <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
-    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -213,8 +213,8 @@
     <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemyProjectile.h" />
-    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />

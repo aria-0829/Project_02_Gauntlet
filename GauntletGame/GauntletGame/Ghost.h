@@ -5,21 +5,28 @@
 #include "Entity.h"
 #include "IRenderable.h"
 
+class EnemyProjectile;
+class Circle;
+
 class Ghost : public Entity, public IRenderable
 {
 	DECLARE_DYNAMIC_DERIVED_CLASS(Ghost, Entity)
 
 private:
-	int direction = 0;
+	std::list<EnemyProjectile*> enemyProjectiles;
+	json::JSON enemyProjectileData;
 
 public:
+
 	Ghost() = default;
 	~Ghost() override = default;
 
 	void Update();
+	void Render();
+	void Destroy();
 	void Load(json::JSON& _json);
 };
-
 #endif // !_GHOST_H_
+
 
 
