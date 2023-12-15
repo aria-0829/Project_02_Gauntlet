@@ -15,11 +15,11 @@
         },
         {
             "ClassName": "Player",
-            "Position": {
-                "x": 0,
-                "y": 0
-            },
             "ClassData": {
+                "Position": {
+                    "x": 800,
+                    "y": 300
+                },
                 "lives": 3,
                 "speed": 5,
                 "imagePath": "../GameResources/Witch/Front/Front-Shoot (3).png",

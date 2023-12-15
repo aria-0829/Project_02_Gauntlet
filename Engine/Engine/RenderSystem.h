@@ -2,6 +2,7 @@
 #ifndef _RENDER_SYSTEM_H_
 #define _RENDER_SYSTEM_H_
 
+#include "Vector2D.h"
 class IRenderable;
 
 class RenderSystem
@@ -16,6 +17,9 @@ private:
 	SDL_Renderer* renderer = nullptr;
 
 	std::list<IRenderable*> iRenderables;
+
+	Vector2D mousePosition;  
+	bool isMousePressed = false;
 
 	inline explicit RenderSystem() = default;
 	inline ~RenderSystem() = default;
@@ -39,6 +43,14 @@ public:
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
 	SDL_Renderer* GetRenderer() { return renderer; }
+
+	bool GetMousePressed() { return isMousePressed; }
+	Vector2D GetMousePosition() const 
+	{
+		int x, y;
+		SDL_GetMouseState(&x, &y);
+		return Vector2D(x, y);
+	}
 
 	void AddIRenderable(IRenderable* _iRenderable) { iRenderables.push_back(_iRenderable); }
 	void RemoveIRenderable(IRenderable* _iRenderable) { iRenderables.remove(_iRenderable); }

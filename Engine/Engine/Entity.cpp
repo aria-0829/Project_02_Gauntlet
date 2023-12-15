@@ -6,7 +6,7 @@ void Entity::Initialize()
 {
 	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
 
-	dstrect = { position.x, position.y, imageWidth, imageHeight }; //Set position and size
+	dstrect = { (int)position.x, (int)position.y, imageWidth, imageHeight }; //Set position and size
 
 	std::cout << this->GetName() << " Initialized" << std::endl << std::endl;
 }

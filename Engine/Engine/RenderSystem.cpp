@@ -26,6 +26,21 @@ void RenderSystem::Update()
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
+		if (event.type == SDL_MOUSEBUTTONDOWN) 
+		{
+			if (event.button.button == SDL_BUTTON_LEFT) 
+			{
+				isMousePressed = true;
+			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONUP) 
+		{
+			if (event.button.button == SDL_BUTTON_LEFT) 
+			{
+				isMousePressed = false;
+			}
+		}
+
 		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 		{
 			GameEngine::Instance().setGameRunning(false);

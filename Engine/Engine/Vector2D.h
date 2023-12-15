@@ -2,14 +2,30 @@
 #ifndef _VECTOR_2D_H_
 #define _VECTOR_2D_H_
 
+#include "EngineCore.h"
+
 class Vector2D
 {
 public:
-	int x = 0;
-	int y = 0;
+	float x = 0;
+	float y = 0;
 
 	Vector2D();
-	Vector2D(int x, int y);
+	Vector2D(float x, float y);
+
+	void Normalize();
+
+	friend Vector2D& operator+(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator-(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator*(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator/(const Vector2D& v1, const Vector2D& v2);
+
+	friend Vector2D& operator+=(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator-=(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator*=(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D& operator/=(const Vector2D& v1, const Vector2D& v2);
+
+	Vector2D& operator*(const float& i);
 };
 
 #endif // !_VECTOR_2D_H_
