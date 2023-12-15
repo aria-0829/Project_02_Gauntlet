@@ -8,7 +8,7 @@
             },
             "ClassData": {
                 "speed": 0,
-                "imagePath": "../GameResources/Dungeon/Dungeon.png",
+                "imagePath": "../GameResources/Dungeon/StoneFloor.jpeg",
                 "imageWidth": 256,
                 "imageHeight": 256
             }
@@ -40,6 +40,9 @@
                 "y": 0
             },
             "ClassData": {
+                "imagePath": "../GameResources/Dungeon/tiles/Tile (23).png",
+                "imageWidth": 48,
+                "imageHeight": 48,
                 "EnemyShip": {
                     "speed": 3,
                     "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
@@ -61,23 +64,75 @@
             }
         },
         {
-            "ClassName": "AsteroidSpawner",
-            "Position": {
-                "x": 0,
-                "y": 0
-            },
+            "ClassName": "ObjectSpawner",
             "ClassData": {
-                "Asteroid": {
+                "Position": {
+                    "x": 10,
+                    "y": 20
+                },
+                "Barrel": {
                     "speed": 1,
-                    "imagePath": "GameResources/Dungeon/objects/Barrel (1).png",
+                    "imagePath": "../GameResources/Dungeon/objects/Barrel (1).png",
                     "imageWidth": 64,
                     "imageHeight": 64
                 },
-                "Star": {
-                    "imagePath": "GameResources/Dungeon/objects/Crate.png",
-                    "imageWidth": 23,
-                    "imageHeight": 21
-                }
+                "BarrelPositions": [
+                    {
+                        "Position": {
+                            "x": 20,
+                            "y": 200
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 40,
+                            "y": 300
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 50,
+                            "y": 600
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 70,
+                            "y": 800
+                        }
+                    }
+                ],
+                "Wall": {
+                    "imagePath": "../GameResources/Dungeon/tiles/Tile (57).png",
+                    "imageWidth": 64,
+                    "imageHeight": 64
+                },
+                "WallPositions": [
+                    {
+                        "Position": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 0,
+                            "y": 64
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 0,
+                            "y": 128
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 64,
+                            "y": 128
+                        }
+                    }
+                ]
             }
         }
     ]

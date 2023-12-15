@@ -46,7 +46,7 @@ void RenderSystem::Update()
 
 	// Render things here
 	Scene::Instance().Update();
-	Scene::Instance().GetEntityByName("Player")->Render();
+	Scene::Instance().Render();
 
 	SDL_RenderPresent(renderer);
 }

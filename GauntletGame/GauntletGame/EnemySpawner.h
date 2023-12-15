@@ -22,6 +22,7 @@ public:
 
 	void Initialize() override;
 	void Update();
+	void Render();
 	void Destroy();
 	void SpawnEnemies();
 	void Load(json::JSON& _json);

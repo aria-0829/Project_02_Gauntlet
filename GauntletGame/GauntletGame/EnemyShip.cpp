@@ -39,7 +39,7 @@ void EnemyShip::Update()
 	enemyProjectiles.remove_if([](EnemyProjectile* projectile)
 		{
 			projectile->Update();
-			projectile->Render();
+			//projectile->Render();
 
 			//Check if the projectile is out of the window
 			if (projectile->GetPositionY() < 0)
@@ -63,6 +63,16 @@ void EnemyShip::Update()
 	//		}
 			return false; //Keep the projectile
 		});
+}
+
+void EnemyShip::Render()
+{
+	Entity::Render();
+
+	for (auto projectile : enemyProjectiles)
+	{
+		projectile->Render();
+	}
 }
 
 void EnemyShip::Destroy()

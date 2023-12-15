@@ -12,9 +12,9 @@
 #include "EnemyShip.h"
 #include "EnemyProjectile.h"
 
-#include "AsteroidSpawner.h"
-#include "Asteroid.h"
+#include "ObjectSpawner.h"
+#include "Barrel.h"
 #include "Background.h"
-#include "Star.h"
+#include "Wall.h"
 
 #endif // !_GAME_CORE_H_

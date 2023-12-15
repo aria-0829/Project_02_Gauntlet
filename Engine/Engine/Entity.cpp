@@ -6,14 +6,15 @@ void Entity::Initialize()
 {
 	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
 
-	dstrect = { posX, posY, imageWidth, imageHeight }; //Set position and size
+	dstrect = { position.x, position.y, imageWidth, imageHeight }; //Set position and size
 
-	std::cout << "Entity Initialized" << std::endl << std::endl;
+	//std::cout << "Entity Initialized" << std::endl << std::endl;
 }
 
 void Entity::Update()
 {
-	std::cout << "Entity Updating..." << std::endl << std::endl;
+	
+
 	collisionCircle = { dstrect.x, dstrect.y, dstrect.h / 2 }; //Update collision circle
 }
 
@@ -30,4 +31,19 @@ void Entity::Render()
 
 void Entity::Load(json::JSON& _json)
 {
+	if (_json.hasKey("Position"))
+	{
+		json::JSON positionData = _json["Position"];
+
+		if (positionData.hasKey("x"))
+		{
+			position.x = positionData["x"].ToInt();
+			std::cout << "x: " << position.x << std::endl;
+		}
+		if (positionData.hasKey("y"))
+		{
+			position.y = positionData["y"].ToInt();
+			std::cout << "y: " << position.y << std::endl;
+		}
+	}
 }

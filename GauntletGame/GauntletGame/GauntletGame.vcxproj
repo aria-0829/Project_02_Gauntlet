@@ -196,8 +196,8 @@
     <Font Include="..\Build\Assets\PAPYRUS.TTF" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="AsteroidSpawner.cpp" />
+    <ClCompile Include="Barrel.cpp" />
+    <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
     <ClCompile Include="EnemyShip.cpp" />
@@ -206,11 +206,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="Star.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="AsteroidSpawner.h" />
+    <ClInclude Include="Barrel.h" />
+    <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemyProjectile.h" />
     <ClInclude Include="EnemyShip.h" />
@@ -219,7 +219,7 @@
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Star.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,6 +20,16 @@ void Scene::Update()
 	CheckCollisions();
 }
 
+void Scene::Render()
+{
+	for (auto& entity : entities)
+	{
+		std::string name = entity->GetName();
+		std::cout << "Rendering: " << name << std::endl;
+		entity->Render();
+	}
+}
+
 void Scene::Destroy()
 {
 	for (auto& entity : entities)
@@ -50,7 +60,7 @@ void Scene::Load(json::JSON& _json)
 				for (json::JSON& entityJSON : entitiesJSON.ArrayRange())
 				{
 					std::string entityName = entityJSON["ClassName"].ToString();
-					
+					std::cout << "Creating: " << entityName << std::endl;
 					Entity* entity = CreateEntity(entityName);
 					entity->SetName(entityName);
 					entity->Load(entityJSON["ClassData"]);

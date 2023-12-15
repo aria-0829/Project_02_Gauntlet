@@ -36,6 +36,7 @@ public:
 
 	void Initialize();
 	void Update();
+	void Render();
 	void Destroy();
 	void Load(json::JSON& _json);
 	Entity* CreateEntity(const std::string& _entityName);

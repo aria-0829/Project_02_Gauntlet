@@ -24,7 +24,7 @@ void EnemySpawner::Update()
 	ships.remove_if([](EnemyShip* ship)
 	{
 		ship->Update();
-		ship->Render();
+		//ship->Render();
 
 		//Check if the ship is out of the window
 		if (ship->GetPositionY() > RenderSystem::Instance().GetHeight())
@@ -54,7 +54,7 @@ void EnemySpawner::Update()
 	ufos.remove_if([](EnemyUFO* ufo)
 		{
 			ufo->Update();
-			ufo->Render();
+			//ufo->Render();
 
 	//		//Get the collision circles
 	//		Circle ufoCollider = ufo->GetCollisionCircle();
@@ -78,6 +78,18 @@ void EnemySpawner::Update()
 	//		//}
 			return false; //Keep the ufo
 		});
+}
+
+void EnemySpawner::Render()
+{
+	for (auto& ship : ships)
+	{
+		ship->Render();
+	}
+	for (auto& ufo : ufos)
+	{
+		ufo->Render();
+	}
 }
 
 void EnemySpawner::SpawnEnemies()

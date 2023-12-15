@@ -11,6 +11,7 @@ class Entity : public Object
 
 protected:
 	std::string name = "";
+	Vector2D position;
 	int speed = 0;
 	int imageWidth = 0;
 	int imageHeight = 0;
@@ -18,8 +19,6 @@ protected:
 	SDL_Texture* tex = nullptr;
 	SDL_Rect dstrect = { 0, 0, 0, 0 };
 	Circle collisionCircle = { 0, 0, 0 };
-	int posX = 0;
-	int posY = 0;
 
 public:
 	Entity() = default;
@@ -31,8 +30,8 @@ public:
 	virtual void Render();
 	virtual void Load(json::JSON& _json);
 	int GetPositionY() { return dstrect.y; }
-	void SetPositionX(int _x) { posX = _x; }
-	void SetPositionY(int _y) { posY = _y; }
+	void SetPositionX(int _x) { position.x = _x; }
+	void SetPositionY(int _y) { position.y = _y; }
 	std::string GetName() { return name; }
 	void SetName(std::string _name) { name = _name; }
 

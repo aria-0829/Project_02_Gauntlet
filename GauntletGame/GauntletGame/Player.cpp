@@ -38,7 +38,7 @@ void Player::Update()
 	projectiles.remove_if([](Projectile* projectile)
 	{
 		projectile->Update();
-		projectile->Render();
+		//projectile->Render();
 
 		//Check if the projectile is out of the window
 		if (projectile->GetPositionY() < 0)
@@ -97,6 +97,10 @@ void Player::Damaged()
 
 void Player::Render()
 {
+	for (auto projectile : projectiles)
+	{
+		projectile->Render();
+	}
 	//Apply the movement to the playerDstrect
 	dstrect.x = windowWidth / 2 + moveX;
 	dstrect.y = (windowHeight - imageHeight) + moveY;

@@ -1,35 +1,43 @@
 #include "GameCore.h"
 
-IMPLEMENT_DYNAMIC_CLASS(Star)
+IMPLEMENT_DYNAMIC_CLASS(Barrel)
 
-void Star::Initialize()
+void Barrel::Initialize()
 {
-	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
-	
+	Entity::Initialize();
+
 	//Generate a random scale
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> scaleDis(0.5f, 2.0f);
+	std::uniform_real_distribution<float> scaleDis(0.5f, 1.5f);
 	float scale = scaleDis(gen);
 
 	//Generate a random start position
 	std::uniform_real_distribution<float> posDis(0, RenderSystem::Instance().GetWidth());
-	int posX = posDis(gen);
 
-	dstrect = { posX, -imageHeight, static_cast<int>(imageWidth * scale), static_cast<int>(imageHeight * scale) };  //Coming from top
-
-	//Generate a random speed
-	std::uniform_real_distribution<float> speedDis(1.5, 3);
-	speed = speedDis(gen);
+	position.x = posDis(gen);
+	position.y = -imageHeight;
+	dstrect.w = static_cast<int>(imageWidth * scale);
+	dstrect.h = static_cast<int>(imageHeight * scale);
 }
 
-void Star::Update()
+void Barrel::Update()
 {
-	dstrect.y += speed; //Move down
+	Entity::Update();
 }
 
-void Star::Load(json::JSON& _json)
+void Barrel::Render()
 {
+	Entity::Render();
+}
+
+void Barrel::Load(json::JSON& _json)
+{
+	if (_json.hasKey("speed"))
+	{
+		speed = _json["speed"].ToInt();  //Load speed
+	}
+
 	if (_json.hasKey("imagePath"))
 	{
 		imagePath = _json["imagePath"].ToString();  //Load image path

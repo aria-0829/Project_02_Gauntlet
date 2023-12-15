@@ -40,6 +40,7 @@
 
 #include "CollisionDetection.h"
 #include "Circle.h"
+#include "Vector2D.h"
 
 #include "Entity.h"
 #include "Object.h"

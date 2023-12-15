@@ -21,8 +21,6 @@ void Background::Update()
 	{
 		dstrect.y = -RenderSystem::Instance().GetHeight();
 	}
-
-	Render();
 }
 
 void Background::Load(json::JSON& _json)
