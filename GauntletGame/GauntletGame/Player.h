@@ -12,10 +12,6 @@ class Player : public Entity, public IRenderable
 
 private:
 	int lives = 0;
-	int moveX = 0;
-	int moveY = 0;
-	int windowWidth = 0;
-	int windowHeight = 0;
 
 	std::list<Projectile*> projectiles;
 	json::JSON projectileData;

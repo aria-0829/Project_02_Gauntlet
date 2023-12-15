@@ -21,7 +21,7 @@
                     "y": 300
                 },
                 "lives": 3,
-                "speed": 5,
+                "speed": 300,
                 "imagePath": "../GameResources/Witch/Front/Front-Shoot (3).png",
                 "imageWidth": 64,
                 "imageHeight": 64,

@@ -4,11 +4,11 @@ IMPLEMENT_DYNAMIC_CLASS(Player)
 
 void Player::Initialize()
 {
-	windowWidth = RenderSystem::Instance().GetWidth();
-	windowHeight = RenderSystem::Instance().GetHeight();
+	Entity::Initialize();
 
-	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
-	dstrect = { windowWidth / 2, (windowHeight - imageHeight), imageWidth, imageHeight};  //Player starting position at the bottom middle of the window
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
+
 	std::cout << "Player Initialized" << std::endl << std::endl;
 }
 
@@ -16,14 +16,36 @@ void Player::Update()
 {
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
-	GameTime& gameTime = GameTime::Instance();
-	float deltaTime = gameTime.DeltaTime();
+	float deltaTime = GameTime::Instance().DeltaTime();
 
-	if (currentKeyStates[SDL_SCANCODE_W]) { moveY -= speed; }
-	if (currentKeyStates[SDL_SCANCODE_A]) { moveX -= speed; }
-	if (currentKeyStates[SDL_SCANCODE_S]) { moveY += speed; }
-	if (currentKeyStates[SDL_SCANCODE_D]) { moveX += speed; }
+	// Player Movement
+	if (currentKeyStates[SDL_SCANCODE_A])
+	{
+		position.x -= speed * deltaTime;
+	}
+	if (currentKeyStates[SDL_SCANCODE_D])
+	{
+		position.x += speed * deltaTime;
+	}
+	if (currentKeyStates[SDL_SCANCODE_W])
+	{
+		position.y -= speed * deltaTime;
+	}
+	if (currentKeyStates[SDL_SCANCODE_S])
+	{
+		position.y += speed * deltaTime;
+	}
 
+	//Keep the player within the window
+	int windowWidth = RenderSystem::Instance().GetWidth();
+	int windowHeight = RenderSystem::Instance().GetHeight();
+
+	if (position.x < 0) { position.x = 0; }
+	if (position.x > windowWidth - imageWidth) { position.x = windowWidth - imageWidth; }
+	if (position.y < 0) { position.y = 0; }
+	if (position.y > windowHeight - imageHeight) { position.y = windowHeight - imageHeight; }
+
+	// Player Shoot
 	if (RenderSystem::Instance().GetMousePressed())
 	{
 		Shoot(RenderSystem::Instance().GetMousePosition());
@@ -100,31 +122,11 @@ void Player::Render()
 	{
 		projectile->Render();
 	}
-	//Apply the movement to the playerDstrect
-	dstrect.x = windowWidth / 2 + moveX;
-	dstrect.y = (windowHeight - imageHeight) + moveY;
-
-	//Keep the player within the window
-	if (moveX < -(windowWidth / 2))
-	{
-		moveX = -(windowWidth / 2);
-	}
-	if (moveX > (windowWidth - imageWidth) - windowWidth / 2)
-	{
-		moveX = (windowWidth - imageWidth) - windowWidth / 2;
-	}
-
-	if (moveY < -(windowHeight - imageHeight))
-	{
-		moveY = -(windowHeight - imageHeight);
-	}
-	if (moveY > 0)
-	{
-		moveY = 0;
-	}
 
 	collisionCircle = { dstrect.x, dstrect.y, imageWidth / 2 };
 
+	dstrect = { (int)position.x, (int)position.y, dstrect.w, dstrect.h }; //Set position and size
+	
 	SDL_RenderCopy(RenderSystem::Instance().GetRenderer(), tex, NULL, &dstrect);  //Render the player
 }
 
