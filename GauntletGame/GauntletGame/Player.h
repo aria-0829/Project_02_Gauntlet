@@ -25,11 +25,11 @@ public:
 	~Player() override = default;
 
 	void Initialize() override;
-	void Update();
+	void Update() override;
 	void Destroy();
-	void Render();
+	void Render() override;
 	void Load(json::JSON& _json);
-	void Shoot();
+	void Shoot(const Vector2D& _mousePos);
 	void Damaged();
 	void AddProjectile(Projectile* _projectile) { projectiles.push_back(_projectile); }
 	void RemoveProjectile(Projectile* projectile) { projectiles.remove(projectile); }

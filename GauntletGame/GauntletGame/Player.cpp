@@ -19,20 +19,14 @@ void Player::Update()
 	GameTime& gameTime = GameTime::Instance();
 	float deltaTime = gameTime.DeltaTime();
 
-	if (currentKeyStates[SDL_SCANCODE_W]) {
-		moveY -= speed;
-	}
-	if (currentKeyStates[SDL_SCANCODE_A]) {
-		moveX -= speed;
-	}
-	if (currentKeyStates[SDL_SCANCODE_S]) {
-		moveY += speed;
-	}
-	if (currentKeyStates[SDL_SCANCODE_D]) {
-		moveX += speed;
-	}
-	if (currentKeyStates[SDL_SCANCODE_SPACE]) {
-		Shoot();
+	if (currentKeyStates[SDL_SCANCODE_W]) { moveY -= speed; }
+	if (currentKeyStates[SDL_SCANCODE_A]) { moveX -= speed; }
+	if (currentKeyStates[SDL_SCANCODE_S]) { moveY += speed; }
+	if (currentKeyStates[SDL_SCANCODE_D]) { moveX += speed; }
+
+	if (RenderSystem::Instance().GetMousePressed())
+	{
+		Shoot(RenderSystem::Instance().GetMousePosition());
 	}
 
 	projectiles.remove_if([](Projectile* projectile)
@@ -69,19 +63,24 @@ void Player::Destroy()
 	Entity::Destroy();
 }
 
-
-void Player::Shoot()
+void Player::Shoot(const Vector2D& _mousePos)
 {
 	static int frameCount = 0;
 	const int spawnInterval = 5;
 
 	if (frameCount % spawnInterval == 0)
 	{
+		//Vector2D direction = position - _mousePos;
+		//std::cout << position.x << ", " << position.y << std::endl;
+		//direction.Normalize();
+		//std::cout << "Direction: " << direction.x << ", " << direction.y << std::endl;
+		
 		Projectile* projectile = new Projectile();
 		AddProjectile(projectile);
 		projectile->Load(projectileData);
-		projectile->SetPositionX(dstrect.x + imageWidth / 2);
-		projectile->SetPositionY(dstrect.y);
+		projectile->SetPositionX(_mousePos.x);
+		projectile->SetPositionY(_mousePos.y);
+		//projectile->SetDirection(direction);
 		projectile->Initialize();
 	}
 
@@ -131,6 +130,8 @@ void Player::Render()
 
 void Player::Load(json::JSON& _json)  //Load player data from json file
 {
+	Entity::Load(_json);
+
 	if (_json.hasKey("lives"))
 	{
 		lives = _json["lives"].ToInt();  //Load the player lives
