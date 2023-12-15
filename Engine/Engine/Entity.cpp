@@ -6,7 +6,7 @@ void Entity::Initialize()
 {
 	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load tex
 
-	dstrect = { (int)position.x, (int)position.y, imageWidth, imageHeight }; //Set position and size
+	dstrect = { (int)position.x, (int)position.y, dstrect.w, dstrect.h }; //Set position and size
 
 	std::cout << this->GetName() << " Initialized" << std::endl << std::endl;
 }
@@ -26,6 +26,8 @@ void Entity::Destroy()
 
 void Entity::Render()
 {
+	dstrect = { (int)position.x, (int)position.y, dstrect.w, dstrect.h }; //Set position and size
+
 	SDL_RenderCopy(RenderSystem::Instance().GetRenderer(), tex, NULL, &dstrect);
 }
 

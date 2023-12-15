@@ -2,11 +2,19 @@
 
 IMPLEMENT_DYNAMIC_CLASS(Ghost)
 
+void Ghost::Initialize()
+{
+	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
+}
+
 void Ghost::Update()
 {
 	Entity::Update();
 
-	dstrect.x -= speed;
+	position.x -= speed;
 
 	static int frameCount = 0;
 	const int spawnInterval = 20;
@@ -16,8 +24,8 @@ void Ghost::Update()
 		EnemyProjectile* projectile = new EnemyProjectile();
 		enemyProjectiles.push_back(projectile);
 		projectile->Load(enemyProjectileData);
-		projectile->SetPositionX(dstrect.x + imageWidth / 2);
-		projectile->SetPositionY(dstrect.y + imageHeight);
+		projectile->SetPositionX(position.x + imageWidth / 2);
+		projectile->SetPositionY(position.y + imageHeight);
 		projectile->Initialize();
 	}
 

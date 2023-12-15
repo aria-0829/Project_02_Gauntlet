@@ -2,11 +2,23 @@
 
 IMPLEMENT_DYNAMIC_CLASS(Projectile)
 
+void Projectile::Initialize()
+{
+	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
+}
+
 void Projectile::Update()
 {
 	Entity::Update();
+	position.y -= speed;
+	//position = direction * speed + position;
+	//dstrect.y += direction.y * speed;
 
-	dstrect.y -= speed;
+	//std::cout << "Projectile: " << position.x << ", " << position.y << std::endl;
+	//std::cout << "Dstrect: " << dstrect.x << ", " << dstrect.y << std::endl;
 }
 
 void Projectile::Load(json::JSON& _json)

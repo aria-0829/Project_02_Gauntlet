@@ -12,11 +12,6 @@ void Barrel::Initialize()
 	std::uniform_real_distribution<float> scaleDis(0.5f, 1.5f);
 	float scale = scaleDis(gen);
 
-	//Generate a random start position
-	std::uniform_real_distribution<float> posDis(0, RenderSystem::Instance().GetWidth());
-
-	position.x = posDis(gen);
-	position.y = -imageHeight;
 	dstrect.w = static_cast<int>(imageWidth * scale);
 	dstrect.h = static_cast<int>(imageHeight * scale);
 }

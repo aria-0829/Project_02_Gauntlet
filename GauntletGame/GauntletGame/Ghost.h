@@ -21,6 +21,7 @@ public:
 	Ghost() = default;
 	~Ghost() override = default;
 
+	void Initialize();
 	void Update();
 	void Render();
 	void Destroy();

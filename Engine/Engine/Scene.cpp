@@ -25,7 +25,7 @@ void Scene::Render()
 	for (auto& entity : entities)
 	{
 		std::string name = entity->GetName();
-		std::cout << "Scene::Render: " << name << std::endl;
+		//std::cout << "Scene::Render: " << name << std::endl;
 		entity->Render();
 	}
 }

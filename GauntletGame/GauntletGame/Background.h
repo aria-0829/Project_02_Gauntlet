@@ -14,7 +14,6 @@ public:
 	~Background() override = default;
 
 	void Initialize() override;
-	void Update() override;
 	void Load(json::JSON& _json);
 };
 

@@ -13,6 +13,7 @@ public:
 	EnemyProjectile() = default;
 	~EnemyProjectile() override = default;
 
+	void Initialize() override;
 	void Update();
 	void Load(json::JSON& _json);
 };

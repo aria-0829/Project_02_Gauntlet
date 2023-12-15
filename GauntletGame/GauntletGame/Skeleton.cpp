@@ -2,26 +2,23 @@
 
 IMPLEMENT_DYNAMIC_CLASS(Skeleton)
 
+void Skeleton::Initialize()
+{
+	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
+}
+
 void Skeleton::Update()
 {
 	Entity::Update();
 
-	if (direction == 1)
-	{
-		//Moving from left to right
-		dstrect.x += speed;
-	}
-	else
-	{
-		//Moving from right to left
-		dstrect.x -= speed;
-	}
+	//position = direction * speed + position;
+	position.x += speed;
+	position.y -= speed;
 
-	//Change direction if ufo is out of window
-	if (dstrect.x > RenderSystem::Instance().GetWidth() || dstrect.x < -imageWidth)
-	{
-		direction *= -1;
-	}
+
 }
 
 void Skeleton::Load(json::JSON& _json)

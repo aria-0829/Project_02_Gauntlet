@@ -16,6 +16,7 @@ public:
 	Skeleton() = default;
 	~Skeleton() override = default;
 
+	void Initialize();
 	void Update();
 	void Load(json::JSON& _json);
 };

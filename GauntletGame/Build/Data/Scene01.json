@@ -2,11 +2,11 @@
     "Entities": [
         {
             "ClassName": "Background",
-            "Position": {
-                "x": 0,
-                "y": 0
-            },
             "ClassData": {
+                "Position": {
+                    "x": 0,
+                    "y": 0
+                },
                 "speed": 0,
                 "imagePath": "../GameResources/Dungeon/StoneFloor.jpeg",
                 "imageWidth": 256,

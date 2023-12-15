@@ -5,6 +5,9 @@ IMPLEMENT_DYNAMIC_CLASS(SpawnFactory)
 void SpawnFactory::Initialize()
 {
 	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
 }
 
 void SpawnFactory::Update()

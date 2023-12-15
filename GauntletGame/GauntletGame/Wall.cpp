@@ -5,6 +5,9 @@ IMPLEMENT_DYNAMIC_CLASS(Wall)
 void Wall::Initialize()
 {
 	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
 }
 
 void Wall::Update()

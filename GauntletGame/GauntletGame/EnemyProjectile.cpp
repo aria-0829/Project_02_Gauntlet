@@ -2,11 +2,19 @@
 
 IMPLEMENT_DYNAMIC_CLASS(EnemyProjectile)
 
+void EnemyProjectile::Initialize()
+{
+	Entity::Initialize();
+
+	dstrect.w = imageWidth;
+	dstrect.h = imageHeight;
+}
+
 void EnemyProjectile::Update()
 {
 	Entity::Update();
 
-	dstrect.y += speed;
+	position.y += speed;
 }
 
 void EnemyProjectile::Load(json::JSON& _json)
