@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _ENEMY_SHIP_H_
-#define _ENEMY_SHIP_H_
+#ifndef _SKELETON_H_
+#define _SKELETON_H_
 
 #include "Entity.h"
 #include "IRenderable.h"
@@ -8,9 +8,9 @@
 class EnemyProjectile;
 class Circle;
 
-class EnemyShip : public Entity, public IRenderable
+class Skeleton : public Entity, public IRenderable
 {
-	DECLARE_DYNAMIC_DERIVED_CLASS(EnemyShip, Entity)
+	DECLARE_DYNAMIC_DERIVED_CLASS(Skeleton, Entity)
 
 private:
 	std::list<EnemyProjectile*> enemyProjectiles;
@@ -18,16 +18,15 @@ private:
 
 public:
 
-	EnemyShip() = default;
-	~EnemyShip() override = default;
+	Skeleton() = default;
+	~Skeleton() override = default;
 
-	void Initialize();
 	void Update();
 	void Render();
 	void Destroy();
 	void Load(json::JSON& _json);
 };
-#endif // !_ENEMY_SHIP_H_
+#endif // !_SKELETON_H_
 
 
 

@@ -4,7 +4,15 @@ IMPLEMENT_DYNAMIC_CLASS(ObjectSpawner)
 
 void ObjectSpawner::Initialize()
 {
-	Entity::Initialize();
+	for (auto barrel : barrels)
+	{
+		barrel->Initialize();
+	}
+
+	for (auto wall : walls)
+	{
+		wall->Initialize();
+	}
 }
 
 void ObjectSpawner::Update()
@@ -81,8 +89,6 @@ void ObjectSpawner::Load(json::JSON& _json)
 
 				if (barrelPos.hasKey("x")) { barrel->SetPositionX(barrelPos["x"].ToInt()); }
 				if (barrelPos.hasKey("y")) { barrel->SetPositionY(barrelPos["y"].ToInt()); }
-
-				barrel->Initialize();
 			}
 		}
 	}
@@ -108,8 +114,6 @@ void ObjectSpawner::Load(json::JSON& _json)
 
 				if (wallPos.hasKey("x")) { wall->SetPositionX(wallPos["x"].ToInt()); }
 				if (wallPos.hasKey("y")) { wall->SetPositionY(wallPos["y"].ToInt()); }
-				
-				wall->Initialize();
 			}
 		}
 	}

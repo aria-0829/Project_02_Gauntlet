@@ -9,7 +9,7 @@ void GameEngine::Initialize()
 	std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
 	json::JSON documentData = json::JSON::Load(str);
 
-	//GameTime::Instance().Initialize();
+	GameTime::Instance().Initialize();
 	AssetManager::Instance().Initialize();
 
 	RenderSystem::Instance().Load(documentData);

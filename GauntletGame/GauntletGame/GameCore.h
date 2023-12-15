@@ -7,9 +7,10 @@
 #include "Player.h"
 #include "Projectile.h"
 
-#include "EnemySpawner.h"
-#include "EnemyUFO.h"
-#include "EnemyShip.h"
+#include "SpawnFactory.h"
+
+#include "Ghost.h"
+#include "Skeleton.h"
 #include "EnemyProjectile.h"
 
 #include "ObjectSpawner.h"

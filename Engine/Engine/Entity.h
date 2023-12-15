@@ -32,6 +32,7 @@ public:
 	int GetPositionY() { return dstrect.y; }
 	void SetPositionX(int _x) { position.x = _x; }
 	void SetPositionY(int _y) { position.y = _y; }
+	void SetPosition(Vector2D _pos) { position = _pos; }
 	std::string GetName() { return name; }
 	void SetName(std::string _name) { name = _name; }
 

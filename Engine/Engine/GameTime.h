@@ -5,8 +5,6 @@
 class GameTime
 {
 private:
-	void Initialize();
-
 	unsigned int frameCount = 0;
 	std::chrono::duration<float> deltaTime = std::chrono::duration<float>(0.0f);
 	std::chrono::duration<float> totalTime = std::chrono::duration<float>(0.0f);
@@ -39,6 +37,7 @@ public:
 		}
 	}
 
+	void Initialize();
 	void Update();
 
 	float DeltaTime() { return deltaTime.count(); }

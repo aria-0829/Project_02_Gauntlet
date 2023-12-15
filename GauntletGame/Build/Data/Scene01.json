@@ -23,8 +23,8 @@
                 "lives": 3,
                 "speed": 5,
                 "imagePath": "../GameResources/Witch/Front/Front-Shoot (3).png",
-                "imageWidth": 48,
-                "imageHeight": 48,
+                "imageWidth": 64,
+                "imageHeight": 64,
                 "Projectile": {
                     "speed": 5,
                     "imagePath": "../GameResources/Witch/Projectile/Projectile-Projectile (1).png",
@@ -34,16 +34,18 @@
             }
         },
         {
-            "ClassName": "EnemySpawner",
-            "Position": {
-                "x": 0,
-                "y": 0
-            },
+            "ClassName": "SpawnFactory",
             "ClassData": {
-                "imagePath": "../GameResources/Dungeon/tiles/Tile (23).png",
-                "imageWidth": 48,
-                "imageHeight": 48,
-                "EnemyShip": {
+                "Position": {
+                    "x": 800,
+                    "y": 400
+                },
+                "imagePath": "../GameResources/Dungeon/objects/Crate.png",
+                "imageWidth": 64,
+                "imageHeight": 64,
+                "SpawnInterval": 1,
+                "SpawnName": "Skeleton",
+                "SpawnData": {
                     "speed": 3,
                     "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
                     "imageWidth": 64,
@@ -54,15 +56,30 @@
                         "imageWidth": 5,
                         "imageHeight": 17
                     }
-                },
-                "EnemyUFO": {
-                    "speed": 2,
-                    "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
-                    "imageWidth": 52,
-                    "imageHeight": 52
                 }
             }
         },
+        {
+            "ClassName": "SpawnFactory",
+            "ClassData": {
+                "Position": {
+                    "x": 1000,
+                    "y": 600
+                },
+                "imagePath": "../GameResources/Dungeon/objects/Door.png",
+                "imageWidth": 140,
+                "imageHeight": 140,
+                "SpawnInterval": 2,
+                "SpawnName": "Ghost",
+                "SpawnData": {
+                    "speed": 3,
+                    "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
+                    "imageWidth": 64,
+                    "imageHeight": 64
+                }
+            }
+        },
+
         {
             "ClassName": "ObjectSpawner",
             "ClassData": {

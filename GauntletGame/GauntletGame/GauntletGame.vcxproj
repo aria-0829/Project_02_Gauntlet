@@ -200,12 +200,12 @@
     <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
-    <ClCompile Include="EnemyShip.cpp" />
-    <ClCompile Include="EnemySpawner.cpp" />
-    <ClCompile Include="EnemyUFO.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="SpawnFactory.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -213,12 +213,12 @@
     <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemyProjectile.h" />
-    <ClInclude Include="EnemyShip.h" />
-    <ClInclude Include="EnemySpawner.h" />
-    <ClInclude Include="EnemyUFO.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="SpawnFactory.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,21 +1,8 @@
 #include "GameCore.h"
 
-IMPLEMENT_DYNAMIC_CLASS(EnemyShip)
+IMPLEMENT_DYNAMIC_CLASS(Skeleton)
 
-void EnemyShip::Initialize()
-{
-	tex = AssetManager::Instance().LoadTexture((char*)imagePath.c_str()); //Load enemy tex
-
-	//Enemy start positiom at random of top
-	int windowWidth = RenderSystem::Instance().GetWidth();
-	dstrect = { 0, -imageHeight, imageWidth, imageHeight };
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dis(0, (windowWidth - imageWidth));
-	dstrect.x = dis(gen);
-}
-
-void EnemyShip::Update()
+void Skeleton::Update()
 {
 	Entity::Update();
 
@@ -65,7 +52,7 @@ void EnemyShip::Update()
 		});
 }
 
-void EnemyShip::Render()
+void Skeleton::Render()
 {
 	Entity::Render();
 
@@ -75,7 +62,7 @@ void EnemyShip::Render()
 	}
 }
 
-void EnemyShip::Destroy()
+void Skeleton::Destroy()
 {
 	for (auto projectile : enemyProjectiles)
 	{
@@ -87,35 +74,31 @@ void EnemyShip::Destroy()
 	Entity::Destroy();
 }
 
-void EnemyShip::Load(json::JSON& _json)
+void Skeleton::Load(json::JSON& _json)
 {
-	if (_json.hasKey("EnemyShip"))
+	if (_json.hasKey("speed"))
 	{
-		json::JSON shipData = _json["EnemyShip"];
-
-		if (shipData.hasKey("speed"))
-		{
-			speed = shipData["speed"].ToInt();  //Load speed
-		}
-
-		if (shipData.hasKey("imagePath"))
-		{
-			imagePath = shipData["imagePath"].ToString();  //Load image path
-		}
-
-		if (shipData.hasKey("imageWidth"))
-		{
-			imageWidth = shipData["imageWidth"].ToInt();  //Load image width
-		}
-
-		if (shipData.hasKey("imageHeight"))
-		{
-			imageHeight = shipData["imageHeight"].ToInt();  //Load image height
-		}
-
-		if (shipData.hasKey("EnemyProjectile"))
-		{
-			enemyProjectileData = shipData["EnemyProjectile"];  //Load the player projectile data
-		}
+		speed = _json["speed"].ToInt();  //Load speed
 	}
+
+	if (_json.hasKey("imagePath"))
+	{
+		imagePath = _json["imagePath"].ToString();  //Load image path
+	}
+
+	if (_json.hasKey("imageWidth"))
+	{
+		imageWidth = _json["imageWidth"].ToInt();  //Load image width
+	}
+
+	if (_json.hasKey("imageHeight"))
+	{
+		imageHeight = _json["imageHeight"].ToInt();  //Load image height
+	}
+
+	if (_json.hasKey("EnemyProjectile"))
+	{
+		enemyProjectileData = _json["EnemyProjectile"];  //Load the player projectile data
+	}
+	
 }
