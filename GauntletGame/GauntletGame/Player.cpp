@@ -51,20 +51,26 @@ void Player::Update()
 		Shoot(RenderSystem::Instance().GetMousePosition());
 	}
 
-	projectiles.remove_if([](Projectile* projectile)
+	//Update the projectiles
+	for (auto projectile : projectiles)
 	{
 		projectile->Update();
-		//projectile->Render();
+	}
+	
+	//projectiles.remove_if([](Projectile* projectile)
+	//{
+	//	projectile->Update();
+	//	//projectile->Render();
 
-		//Check if the projectile is out of the window
-		if (projectile->GetPositionY() < 0)
-		{
-			projectile->Destroy();
-			delete projectile;
-			return true; //Remove the projectile
-		}
-		return false; //Keep the projectile
-	});
+	//	//Check if the projectile is out of the window
+	//	if (projectile->GetPosition().y < 0)
+	//	{
+	//		projectile->Destroy();
+	//		delete projectile;
+	//		return true; //Remove the projectile
+	//	}
+	//	return false; //Keep the projectile
+	//});
 
 	if (lives <= 0)
 	{

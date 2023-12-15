@@ -27,6 +27,7 @@ public:
 	void Load(json::JSON& _json);
 	void Shoot(const Vector2D& _mousePos);
 	void Damaged();
+	Vector2D GetPosition() { return position; }
 	void AddProjectile(Projectile* _projectile) { projectiles.push_back(_projectile); }
 	void RemoveProjectile(Projectile* projectile) { projectiles.remove(projectile); }
 	std::list<Projectile*> GetProjectiles() { return projectiles; }

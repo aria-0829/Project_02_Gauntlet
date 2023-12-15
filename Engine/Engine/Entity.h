@@ -29,10 +29,12 @@ public:
 	virtual void Destroy();
 	virtual void Render();
 	virtual void Load(json::JSON& _json);
-	int GetPositionY() { return dstrect.y; }
+
+	Vector2D GetPosition() { return position; }
 	void SetPositionX(int _x) { position.x = _x; }
 	void SetPositionY(int _y) { position.y = _y; }
 	void SetPosition(Vector2D _pos) { position = _pos; }
+
 	std::string GetName() { return name; }
 	void SetName(std::string _name) { name = _name; }
 

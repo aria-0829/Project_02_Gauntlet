@@ -14,11 +14,13 @@ void Skeleton::Update()
 {
 	Entity::Update();
 
-	//position = direction * speed + position;
-	position.x += speed;
-	position.y -= speed;
+	// Goto player position
+	Vector2D playerPos = Scene::Instance().GetEntityByName("Player")->GetPosition();
+	Vector2D direction = Vector2D(playerPos - position);
+	direction.Normalize();
 
-
+	float deltaTime = GameTime::Instance().DeltaTime();
+	position = direction * speed * deltaTime + position;
 }
 
 void Skeleton::Load(json::JSON& _json)

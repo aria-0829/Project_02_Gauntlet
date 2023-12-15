@@ -46,7 +46,7 @@
                 "SpawnInterval": 1,
                 "SpawnName": "Ghost",
                 "SpawnData": {
-                    "speed": 3,
+                    "speed": 100,
                     "imagePath": "../GameResources/Ghost/Front/Front-Fly (1).png",
                     "imageWidth": 64,
                     "imageHeight": 64,
@@ -72,7 +72,7 @@
                 "SpawnInterval": 2,
                 "SpawnName": "Skeleton",
                 "SpawnData": {
-                    "speed": 3,
+                    "speed": 50,
                     "imagePath": "../GameResources/Skeleton/Front/Front-Idle (2).png",
                     "imageWidth": 64,
                     "imageHeight": 64

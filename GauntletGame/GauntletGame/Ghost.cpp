@@ -14,8 +14,15 @@ void Ghost::Update()
 {
 	Entity::Update();
 
-	position.x -= speed;
+	// Goto player position
+	Vector2D playerPos = Scene::Instance().GetEntityByName("Player")->GetPosition();
+	Vector2D direction = Vector2D(playerPos - position);
+	direction.Normalize();
 
+	float deltaTime = GameTime::Instance().DeltaTime();
+	position = direction * speed * deltaTime + position;
+
+	// Shooting
 	static int frameCount = 0;
 	const int spawnInterval = 20;
 
@@ -31,18 +38,24 @@ void Ghost::Update()
 
 	++frameCount;
 
-	enemyProjectiles.remove_if([](EnemyProjectile* projectile)
-		{
-			projectile->Update();
-			//projectile->Render();
+	//Update the projectiles
+	for (auto projectile : enemyProjectiles)
+	{
+		projectile->Update();
+	}
+	
+	//enemyProjectiles.remove_if([](EnemyProjectile* projectile)
+	//	{
+	//		projectile->Update();
+	//		//projectile->Render();
 
-			//Check if the projectile is out of the window
-			if (projectile->GetPositionY() < 0)
-			{
-				projectile->Destroy();
-				delete projectile;
-				return true; //Remove the projectile
-			}
+	//		//Check if the projectile is out of the window
+	//		if (projectile->GetPosition().y < 0)
+	//		{
+	//			projectile->Destroy();
+	//			delete projectile;
+	//			return true; //Remove the projectile
+	//		}
 
 	//		//Get the collision circles
 	//		Circle projectileCollider = projectile->GetCollisionCircle();
@@ -56,8 +69,8 @@ void Ghost::Update()
 	//			delete projectile;
 	//			return true; //Remove the projectile
 	//		}
-			return false; //Keep the projectile
-		});
+	//		return false; //Keep the projectile
+	//	});
 }
 
 void Ghost::Render()
