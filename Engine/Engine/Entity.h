@@ -42,7 +42,12 @@ public:
 	void SetName(std::string _name) { name = _name; }
 
 	friend class Scene;
-	//Circle GetCollisionCircle() const { return collisionCircle; }
+	Circle GetCollisionCircle() const { return collisionCircle; }
+
+	void OnCollision(Entity* _other)
+	{
+		speed = 0;
+	}
 };
 
 #endif // !_ENTITY_H_

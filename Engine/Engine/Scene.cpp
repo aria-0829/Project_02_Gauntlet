@@ -75,6 +75,9 @@ Entity* Scene::CreateEntity(const std::string& _entityName)
 	entity->SetName(_entityName);
 	entity->ownerScene = this;
 	entities.push_back(entity);
+	//RenderSystem::Instance().AddIRenderable(entity);
+	CollisionDetection::Instance().AddCollidable(entity);
+
 	std::cout << "Scene Created Entity" << std::endl;
 
 	return entity;
