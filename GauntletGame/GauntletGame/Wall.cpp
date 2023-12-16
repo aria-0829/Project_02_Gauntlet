@@ -22,7 +22,7 @@ void Wall::Render()
 
 void Wall::Load(json::JSON& _json)
 {
-	Entity::Load(_json);
+	//Entity::Load(_json);
 
 	if (_json.hasKey("imagePath"))
 	{

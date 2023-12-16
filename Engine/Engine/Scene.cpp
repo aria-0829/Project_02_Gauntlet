@@ -62,7 +62,6 @@ void Scene::Load(json::JSON& _json)
 					std::string entityName = entityJSON["ClassName"].ToString();
 					std::cout << "Creating: " << entityName << std::endl;
 					Entity* entity = CreateEntity(entityName);
-					entity->SetName(entityName);
 					entity->Load(entityJSON["ClassData"]);
 				}
 			}
@@ -73,7 +72,8 @@ void Scene::Load(json::JSON& _json)
 Entity* Scene::CreateEntity(const std::string& _entityName)
 {
 	const auto entity = (Entity*)CreateObject(_entityName.c_str());
-	//entity->ownerScene = this;
+	entity->SetName(_entityName);
+	entity->ownerScene = this;
 	entities.push_back(entity);
 	std::cout << "Scene Created Entity" << std::endl;
 

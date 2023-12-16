@@ -39,13 +39,13 @@ void Entity::Load(json::JSON& _json)
 
 		if (positionData.hasKey("x"))
 		{
-			position.x = positionData["x"].ToInt();
+			position.x = positionData["x"].ToFloat();
 
 			std::cout<< this->GetName() << ": Position: x: " << position.x << std::endl;
 		}
 		if (positionData.hasKey("y"))
 		{
-			position.y = positionData["y"].ToInt();
+			position.y = positionData["y"].ToFloat();
 			std::cout << "y: " << position.y << std::endl;
 		}
 	}

@@ -87,8 +87,10 @@ void ObjectSpawner::Load(json::JSON& _json)
 				barrels.push_back(barrel);
 				barrel->Load(barrelData);
 
-				if (barrelPos.hasKey("x")) { barrel->SetPositionX(barrelPos["x"].ToInt()); }
-				if (barrelPos.hasKey("y")) { barrel->SetPositionY(barrelPos["y"].ToInt()); }
+				if (barrelPos.hasKey("x") && barrelPos.hasKey("y")) 
+				{ 
+					barrel->SetPosition(Vector2D(barrelPos["x"].ToFloat(), barrelPos["y"].ToFloat()));
+				}
 			}
 		}
 	}
@@ -112,8 +114,13 @@ void ObjectSpawner::Load(json::JSON& _json)
 				walls.push_back(wall);
 				wall->Load(wallData);
 
-				if (wallPos.hasKey("x")) { wall->SetPositionX(wallPos["x"].ToInt()); }
-				if (wallPos.hasKey("y")) { wall->SetPositionY(wallPos["y"].ToInt()); }
+
+				//if (wallPos.hasKey("x")) { wall->SetPositionX(wallPos["x"].ToInt()); }
+				//if (wallPos.hasKey("y")) { wall->SetPositionY(wallPos["y"].ToInt()); }
+				if (wallPos.hasKey("x") && wallPos.hasKey("y"))
+				{
+					wall->SetPosition(Vector2D(wallPos["x"].ToFloat(), wallPos["y"].ToFloat()));
+				}
 			}
 		}
 	}

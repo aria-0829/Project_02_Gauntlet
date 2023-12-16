@@ -12,17 +12,11 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{470bd407-df34-4dd5-88ad-ee8a7227510c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{aa1fd399-bc76-4f3c-b318-ade48923fac9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Systems">
       <UniqueIdentifier>{935b15cc-b894-4fb1-ba19-a67ffb4d7dbe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{18b59ea1-0c3d-4b49-964d-f902a093a0c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{3dd2c704-e63c-49d3-bcd9-319a5b8c2d25}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Systems">
       <UniqueIdentifier>{a1591b2c-05df-4190-9440-3f87b1ea310d}</UniqueIdentifier>
