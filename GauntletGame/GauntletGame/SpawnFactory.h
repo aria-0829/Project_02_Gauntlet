@@ -12,6 +12,7 @@ class SpawnFactory : public Entity, public IRenderable
 private:
 	int spawnInterval = 0;
 	float timeCounter = 0.0f;
+	std::list<Entity*> spawnedList;
 
 	json::JSON spawnData;
 	std::string spawnName;

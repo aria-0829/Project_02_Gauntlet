@@ -14,11 +14,14 @@ void SpawnFactory::Update()
 {
 	Entity::Update();
 
-	timeCounter += GameTime::Instance().DeltaTime();
-	if (timeCounter >= spawnInterval)
+	if (spawnedList.size() < 10)
 	{
-		Spawn();
-		timeCounter = 0.0f;
+		timeCounter += GameTime::Instance().DeltaTime();
+		if (timeCounter >= spawnInterval)
+		{
+			Spawn();
+			timeCounter = 0.0f;
+		}
 	}
 }
 
@@ -26,7 +29,7 @@ void SpawnFactory::Spawn()
 {
 	std::cout << "Creating: " << spawnName << std::endl;
 	Entity* entity = Scene::Instance().CreateEntity(spawnName);
-	entity->SetName(spawnName);
+	spawnedList.push_back(entity);
 	entity->Load(spawnData);
 	entity->SetPosition(position);
 	entity->Initialize();
