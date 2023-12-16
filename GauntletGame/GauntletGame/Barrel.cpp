@@ -9,7 +9,7 @@ void Barrel::Initialize()
 	//Generate a random scale
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> scaleDis(0.5f, 1.5f);
+	std::uniform_real_distribution<float> scaleDis(0.8f, 1.5f);
 	float scale = scaleDis(gen);
 
 	dstrect.w = static_cast<int>(imageWidth * scale);

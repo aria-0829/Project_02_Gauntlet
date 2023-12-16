@@ -16,6 +16,8 @@ private:
 	std::list<EnemyProjectile*> enemyProjectiles;
 	json::JSON enemyProjectileData;
 
+	float timeCounter = 0.0f;
+
 public:
 
 	Ghost() = default;

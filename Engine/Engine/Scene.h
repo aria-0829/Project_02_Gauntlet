@@ -2,22 +2,12 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-//class Background;
-class Player;
-//class EnemySpawner;
-//class AsteroidSpawner;
-
 class Scene
 {
 private:
 	static Scene* instance;
 
 	std::list<Entity*> entities;
-
-	/*Background* background1 = nullptr;
-	Player* player = nullptr;
-	EnemySpawner* enemySpawner = nullptr;
-	AsteroidSpawner* asteroidSpawner = nullptr;*/
 
 	inline explicit Scene() = default;
 	inline ~Scene() = default;

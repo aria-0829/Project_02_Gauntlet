@@ -12,7 +12,21 @@ public:
 
 	Vector2D();
 	Vector2D(float x, float y);
+	Vector2D& Add(const Vector2D& vec)
+	{
+		this->x += vec.x;
+		this->y += vec.y;
 
+		return *this;
+	}
+
+	Vector2D& Multiply(const Vector2D& vec)
+	{
+		this->x *= vec.x;
+		this->y *= vec.y;
+
+		return *this;
+	}
 	void Normalize();
 
 	friend Vector2D& operator+(const Vector2D& v1, const Vector2D& v2);

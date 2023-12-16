@@ -8,13 +8,19 @@ void EnemyProjectile::Initialize()
 
 	dstrect.w = imageWidth;
 	dstrect.h = imageHeight;
+
+	Vector2D playerPos = Scene::Instance().GetEntityByName("Player")->GetPosition();
+	direction = Vector2D(playerPos - position);
+	direction.Normalize();
+	std::cout << "Ghost shooting at Direction: " << direction.x << ", " << direction.y << std::endl;
 }
 
 void EnemyProjectile::Update()
 {
 	Entity::Update();
 
-	position.y += speed;
+	float deltaTime = GameTime::Instance().DeltaTime();
+	position = direction * speed * deltaTime + position;
 }
 
 void EnemyProjectile::Load(json::JSON& _json)

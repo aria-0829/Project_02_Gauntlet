@@ -12,6 +12,7 @@ class Player : public Entity, public IRenderable
 
 private:
 	int lives = 0;
+	float timeCounter = 0.0f;
 
 	std::list<Projectile*> projectiles;
 	json::JSON projectileData;

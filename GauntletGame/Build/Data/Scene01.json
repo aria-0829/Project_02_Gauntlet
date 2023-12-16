@@ -23,13 +23,13 @@
                 "lives": 3,
                 "speed": 300,
                 "imagePath": "../GameResources/Witch/Front/Front-Shoot (3).png",
-                "imageWidth": 64,
-                "imageHeight": 64,
+                "imageWidth": 100,
+                "imageHeight": 100,
                 "Projectile": {
-                    "speed": 350,
+                    "speed": 50.0,
                     "imagePath": "../GameResources/Witch/Projectile/Projectile-Projectile (1).png",
-                    "imageWidth": 5,
-                    "imageHeight": 17
+                    "imageWidth": 10,
+                    "imageHeight": 20
                 }
             }
         },
@@ -51,10 +51,10 @@
                     "imageWidth": 64,
                     "imageHeight": 64,
                     "EnemyProjectile": {
-                        "speed": 50,
+                        "speed": 100,
                         "imagePath": "../GameResources/Dungeon/objects/Pot (1).png",
-                        "imageWidth": 5,
-                        "imageHeight": 17
+                        "imageWidth": 15,
+                        "imageHeight": 15
                     }
                 }
             }
@@ -96,13 +96,13 @@
                 "BarrelPositions": [
                     {
                         "Position": {
-                            "x": 20.0,
-                            "y": 200.0
+                            "x": 60.0,
+                            "y": 220.0
                         }
                     },
                     {
                         "Position": {
-                            "x": 40.0,
+                            "x": 400.0,
                             "y": 300.0
                         }
                     },
@@ -114,8 +114,8 @@
                     },
                     {
                         "Position": {
-                            "x": 70.0,
-                            "y": 800.0
+                            "x": 700.0,
+                            "y": 30.0
                         }
                     }
                 ],
@@ -147,6 +147,24 @@
                         "Position": {
                             "x": 64.0,
                             "y": 128.0
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 128.0,
+                            "y": 128.0
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 192.0,
+                            "y": 128.0
+                        }
+                    },
+                    {
+                        "Position": {
+                            "x": 192.0,
+                            "y": 192.0
                         }
                     }
                 ]

@@ -26,6 +26,8 @@ void GameEngine::Update()
 	while (isRunning)
 	{
 		GameTime::Instance().Update();
+		Scene::Instance().Update();
+
 		RenderSystem::Instance().Update();
 	}
 }

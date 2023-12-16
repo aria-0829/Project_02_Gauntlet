@@ -9,12 +9,16 @@ class Projectile : public Entity, public IRenderable
 {
 	DECLARE_DYNAMIC_DERIVED_CLASS(Projectile, Entity)
 
+private:
+	Vector2D direction;
+	float speed = 0.0f;
+
 public:
 	Projectile() = default;
 	~Projectile() override = default;
 
-	void Initialize();
-	void Update();
+	void Initialize() override;
+	void Update() override;
 	void Load(json::JSON& _json);
 };
 

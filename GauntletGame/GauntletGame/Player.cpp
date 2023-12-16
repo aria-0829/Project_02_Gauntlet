@@ -52,25 +52,25 @@ void Player::Update()
 	}
 
 	//Update the projectiles
-	for (auto projectile : projectiles)
-	{
-		projectile->Update();
-	}
-	
-	//projectiles.remove_if([](Projectile* projectile)
+	//for (auto projectile : projectiles)
 	//{
 	//	projectile->Update();
-	//	//projectile->Render();
+	//}
+	
+	projectiles.remove_if([](Projectile* projectile)
+	{
+		projectile->Update();
 
-	//	//Check if the projectile is out of the window
-	//	if (projectile->GetPosition().y < 0)
-	//	{
-	//		projectile->Destroy();
-	//		delete projectile;
-	//		return true; //Remove the projectile
-	//	}
-	//	return false; //Keep the projectile
-	//});
+		//Check if the projectile is out of the window
+		if (projectile->GetPosition().y < 0 || projectile->GetPosition().y > RenderSystem::Instance().GetHeight()
+			|| projectile->GetPosition().x < 0 || projectile->GetPosition().x > RenderSystem::Instance().GetWidth())
+		{
+			projectile->Destroy();
+			delete projectile;
+			return true; //Remove the projectile
+		}
+		return false; //Keep the projectile
+	});
 
 	if (lives <= 0)
 	{
@@ -93,26 +93,27 @@ void Player::Destroy()
 
 void Player::Shoot(const Vector2D& _mousePos)
 {
-	static int frameCount = 0;
-	const int spawnInterval = 5;
+	float shootInterval = 0.2f;
+	timeCounter += GameTime::Instance().DeltaTime();
 
-	if (frameCount % spawnInterval == 0)
+	if (timeCounter > shootInterval)
 	{
-		//Vector2D direction = position - _mousePos;
+		Vector2D shootPos = Vector2D((position.x + imageWidth / 2), (position.y + imageHeight));
+
+		//Vector2D direction = _mousePos - position;
 		//std::cout << position.x << ", " << position.y << std::endl;
 		//direction.Normalize();
 		//std::cout << "Direction: " << direction.x << ", " << direction.y << std::endl;
-		
-		Projectile* projectile = new Projectile();
-		AddProjectile(projectile);
-		projectile->Load(projectileData);
-		projectile->SetPositionX(_mousePos.x);
-		projectile->SetPositionY(_mousePos.y);
-		//projectile->SetDirection(direction);
-		projectile->Initialize();
-	}
+		Entity* entity = Scene::Instance().CreateEntity("Projectile");
 
-	++frameCount;
+		//Projectile* projectile = new Projectile();
+		//AddProjectile(projectile);
+		entity->Load(projectileData);
+		entity->SetPosition(shootPos);
+		entity->Initialize();
+
+		timeCounter = 0.0f;
+	}
 }
 
 void Player::Damaged()

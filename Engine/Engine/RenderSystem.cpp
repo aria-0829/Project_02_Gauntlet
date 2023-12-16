@@ -13,16 +13,6 @@ void RenderSystem::Initialize()
 
 void RenderSystem::Update()
 {
-	int FPS = 60;
-	int frameDelay = 1000 / FPS;
-	Uint32 frameStart = SDL_GetTicks();
-	int frameTime = SDL_GetTicks() - frameStart;
-	
-	if (frameDelay > frameTime)
-	{
-		SDL_Delay(frameDelay - frameTime);
-	}
-
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -60,7 +50,6 @@ void RenderSystem::Update()
 	SDL_RenderClear(renderer);
 
 	// Render things here
-	Scene::Instance().Update();
 	Scene::Instance().Render();
 
 	SDL_RenderPresent(renderer);
